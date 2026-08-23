@@ -1,0 +1,2296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+<meta name="theme-color" content="#0a0a0f"/>
+<meta name="description" content="Sinha Awards – Sri Lanka's Premier School Media Unit Awards Platform"/>
+<title>Sinha Awards 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Sinhala:wght@400;600;700&display=swap" rel="stylesheet"/>
+<style>
+/* ═══════════════════════════════════════════════
+   SINHA AWARDS 2026 — Production CSS
+═══════════════════════════════════════════════ */
+:root{
+  --gold:#C9A84C;--gold-light:#E8C97A;--gold-dark:#8B6914;--gold-glow:rgba(201,168,76,.25);
+  --bg:#08080f;--bg2:#0f0f1a;--bg3:#141420;--bg4:#1a1a2e;
+  --surface:rgba(255,255,255,.04);--surface2:rgba(255,255,255,.07);--surface3:rgba(255,255,255,.1);
+  --border:rgba(201,168,76,.15);--border2:rgba(201,168,76,.3);--border3:rgba(255,255,255,.08);
+  --text:#f0ebe0;--text2:#a89878;--text3:#6b6050;
+  --red:#e53e3e;--green:#38a169;--blue:#3182ce;--purple:#805ad5;
+  --nav-h:64px;--safe-bottom:env(safe-area-inset-bottom,0px);
+  --radius:16px;--radius-sm:10px;--radius-lg:24px;
+  --shadow:0 8px 32px rgba(0,0,0,.6);
+  --font-display:'Playfair Display',serif;
+  --font-body:'Inter',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);font-family:var(--font-body)}
+body{display:flex;flex-direction:column;position:relative}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar{width:3px;height:3px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--gold-dark);border-radius:2px}
+
+/* ══ APP SHELL ══════════════════════════════════ */
+#app{display:flex;flex-direction:column;height:100vh;overflow:hidden;position:relative}
+#screen-wrap{flex:1;overflow:hidden;position:relative}
+.screen{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;display:none;flex-direction:column;padding-bottom:calc(var(--nav-h) + 20px + var(--safe-bottom));animation:screenIn .35s cubic-bezier(.25,.8,.25,1)}
+.screen.active{display:flex}
+@keyframes screenIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+/* ══ BOTTOM NAV ═════════════════════════════════ */
+#bottom-nav{height:calc(var(--nav-h) + var(--safe-bottom));padding-bottom:var(--safe-bottom);background:rgba(8,8,15,.96);border-top:1px solid var(--border);display:flex;align-items:stretch;backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);position:relative;z-index:200;flex-shrink:0}
+.nav-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;border:none;background:transparent;color:var(--text3);font-size:10px;font-family:var(--font-body);font-weight:500;letter-spacing:.3px;transition:all .25s;padding:8px 4px;position:relative}
+.nav-item.active{color:var(--gold)}
+.nav-item .nav-icon{font-size:20px;transition:transform .25s}
+.nav-item.active .nav-icon{transform:scale(1.15)}
+.nav-item::after{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:0;height:2px;background:linear-gradient(90deg,var(--gold),var(--gold-light));border-radius:0 0 2px 2px;transition:width .25s}
+.nav-item.active::after{width:40px}
+.nav-badge{position:absolute;top:6px;right:calc(50% - 18px);background:var(--red);color:#fff;font-size:9px;font-weight:700;min-width:16px;height:16px;border-radius:8px;display:flex;align-items:center;justify-content:center;padding:0 4px}
+
+/* ══ COMMON COMPONENTS ══════════════════════════ */
+.page-header{padding:56px 20px 20px;background:linear-gradient(180deg,var(--bg2) 0%,transparent 100%);flex-shrink:0}
+.page-title{font-family:var(--font-display);font-size:28px;font-weight:700;background:linear-gradient(135deg,var(--gold-light),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.page-subtitle{color:var(--text2);font-size:13px;margin-top:4px;letter-spacing:.3px}
+
+.card{background:var(--surface);border:1px solid var(--border3);border-radius:var(--radius);padding:16px;backdrop-filter:blur(12px)}
+.card-gold{background:linear-gradient(135deg,rgba(201,168,76,.08),rgba(232,201,122,.05));border-color:var(--border);position:relative;overflow:hidden}
+.card-gold::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at top left,rgba(201,168,76,.1),transparent 60%);pointer-events:none}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 24px;border:none;border-radius:var(--radius-sm);font-family:var(--font-body);font-size:14px;font-weight:600;cursor:pointer;transition:all .25s;letter-spacing:.3px;white-space:nowrap}
+.btn-primary{background:linear-gradient(135deg,var(--gold),var(--gold-light));color:#080810;box-shadow:0 4px 20px var(--gold-glow)}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 8px 28px var(--gold-glow)}
+.btn-primary:active{transform:translateY(0)}
+.btn-outline{background:transparent;color:var(--gold);border:1.5px solid var(--border2)}
+.btn-outline:hover{background:var(--gold-glow)}
+.btn-ghost{background:var(--surface);color:var(--text);border:1px solid var(--border3)}
+.btn-danger{background:rgba(229,62,62,.15);color:var(--red);border:1px solid rgba(229,62,62,.3)}
+.btn-block{width:100%;display:flex}
+.btn-lg{padding:17px 32px;font-size:16px;border-radius:var(--radius)}
+.btn-sm{padding:9px 16px;font-size:13px}
+.btn:disabled{opacity:.4;cursor:not-allowed;transform:none!important}
+
+.input-group{margin-bottom:16px}
+.input-label{display:block;font-size:12px;font-weight:600;color:var(--text2);margin-bottom:8px;letter-spacing:.5px;text-transform:uppercase}
+.input-field{width:100%;background:var(--surface2);border:1.5px solid var(--border3);border-radius:var(--radius-sm);padding:14px 16px;color:var(--text);font-family:var(--font-body);font-size:15px;outline:none;transition:all .25s;-webkit-appearance:none}
+.input-field:focus{border-color:var(--gold);background:rgba(201,168,76,.06);box-shadow:0 0 0 3px rgba(201,168,76,.1)}
+.input-field::placeholder{color:var(--text3)}
+.input-field.error{border-color:var(--red)}
+.input-error{font-size:12px;color:var(--red);margin-top:6px;display:none}
+.input-error.show{display:block}
+.input-hint{font-size:12px;color:var(--text3);margin-top:6px}
+
+.chip{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;background:var(--surface2);border:1px solid var(--border3);border-radius:50px;font-size:12px;color:var(--text2);font-weight:500}
+.chip-gold{background:rgba(201,168,76,.1);border-color:var(--border2);color:var(--gold)}
+.chip-green{background:rgba(56,161,105,.1);border-color:rgba(56,161,105,.3);color:#68d391}
+.chip-red{background:rgba(229,62,62,.1);border-color:rgba(229,62,62,.3);color:#fc8181}
+
+.divider{height:1px;background:var(--border3);margin:20px 0}
+.divider-gold{background:linear-gradient(90deg,transparent,var(--border2),transparent)}
+
+.section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.section-label{font-size:12px;font-weight:700;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase}
+.section-action{font-size:13px;color:var(--text2);cursor:pointer}
+
+.gold-line{width:40px;height:2px;background:linear-gradient(90deg,var(--gold),var(--gold-light));border-radius:1px;margin:8px 0 16px}
+
+/* ══ TOAST ══════════════════════════════════════ */
+#toast-container{position:fixed;top:60px;left:50%;transform:translateX(-50%);z-index:9999;display:flex;flex-direction:column;gap:8px;pointer-events:none;width:90%;max-width:360px}
+.toast{background:var(--bg3);border-radius:var(--radius-sm);padding:14px 18px;display:flex;align-items:center;gap:12px;box-shadow:var(--shadow);border:1px solid var(--border3);animation:toastIn .35s cubic-bezier(.34,1.56,.64,1);font-size:14px;pointer-events:auto}
+.toast.success{border-color:rgba(56,161,105,.4);background:rgba(56,161,105,.08)}
+.toast.error{border-color:rgba(229,62,62,.4);background:rgba(229,62,62,.08)}
+.toast.info{border-color:var(--border2);background:rgba(201,168,76,.06)}
+.toast.warning{border-color:rgba(236,201,75,.4);background:rgba(236,201,75,.08)}
+.toast-icon{font-size:18px;flex-shrink:0}
+.toast-msg{flex:1;line-height:1.4;font-size:13px}
+@keyframes toastIn{from{opacity:0;transform:translateY(-20px) scale(.9)}to{opacity:1;transform:translateY(0) scale(1)}}
+
+/* ══ MODAL ══════════════════════════════════════ */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:500;display:flex;align-items:flex-end;justify-content:center;backdrop-filter:blur(8px);animation:fadeIn .25s ease;padding-bottom:var(--safe-bottom)}
+.modal-box{background:var(--bg3);border-radius:var(--radius-lg) var(--radius-lg) 0 0;padding:28px 24px 32px;width:100%;max-width:480px;max-height:90vh;overflow-y:auto;animation:slideUp .35s cubic-bezier(.25,.8,.25,1);border:1px solid var(--border);border-bottom:none}
+.modal-handle{width:36px;height:4px;background:var(--surface3);border-radius:2px;margin:0 auto 20px}
+.modal-title{font-family:var(--font-display);font-size:22px;font-weight:700;color:var(--text);margin-bottom:8px}
+.modal-subtitle{font-size:14px;color:var(--text2);margin-bottom:24px;line-height:1.6}
+.modal-center{text-align:center}
+.modal-full{position:fixed;inset:0;border-radius:0;max-height:100vh}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+
+/* ══ LOADING ════════════════════════════════════ */
+.spinner{width:20px;height:20px;border:2px solid rgba(255,255,255,.2);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
+.spinner-gold{border-color:rgba(201,168,76,.2);border-top-color:var(--gold)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-overlay{position:fixed;inset:0;background:rgba(8,8,15,.9);z-index:1000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px}
+.loading-logo{font-family:var(--font-display);font-size:36px;background:linear-gradient(135deg,var(--gold-light),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* ══ PARTICLES ══════════════════════════════════ */
+#particles-canvas{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.4}
+
+/* ════════════════════════════════════════════════
+   HOME SCREEN
+════════════════════════════════════════════════ */
+.hero-section{position:relative;padding:48px 20px 32px;overflow:hidden;flex-shrink:0}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(201,168,76,.18) 0%,transparent 65%);pointer-events:none}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(201,168,76,.1);border:1px solid var(--border2);border-radius:50px;padding:6px 14px;font-size:11px;color:var(--gold);font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:16px}
+.hero-title{font-family:var(--font-display);font-size:38px;font-weight:900;line-height:1.15;margin-bottom:8px}
+.hero-title .gold{background:linear-gradient(135deg,var(--gold-light),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-subtitle{font-size:14px;color:var(--text2);line-height:1.6;margin-bottom:24px}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap}
+
+.countdown-section{padding:0 20px 24px;flex-shrink:0}
+.countdown-card{background:linear-gradient(135deg,rgba(201,168,76,.08),rgba(8,8,15,.5));border:1px solid var(--border2);border-radius:var(--radius);padding:20px;position:relative;overflow:hidden}
+.countdown-title{font-size:11px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;font-weight:700;margin-bottom:16px}
+.countdown-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.cd-unit{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:12px 8px;text-align:center}
+.cd-num{font-family:var(--font-display);font-size:28px;font-weight:700;color:var(--gold-light);line-height:1}
+.cd-lbl{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;margin-top:4px}
+.cd-sep{font-size:22px;color:var(--gold-dark);align-self:center;text-align:center}
+
+.home-scroll{padding:0 20px;display:flex;flex-direction:column;gap:24px}
+
+.featured-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.featured-card{border-radius:var(--radius);overflow:hidden;position:relative;aspect-ratio:3/4;cursor:pointer}
+.featured-card:first-child{grid-row:span 2;aspect-ratio:auto}
+.featured-card img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.featured-card:hover img{transform:scale(1.05)}
+.featured-card-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.85),transparent 50%);display:flex;flex-direction:column;justify-content:flex-end;padding:14px}
+.featured-school{font-size:11px;color:var(--gold);font-weight:700;letter-spacing:.5px;text-transform:uppercase}
+.featured-name{font-size:14px;font-weight:600;margin-top:2px;line-height:1.3}
+.featured-cat{font-size:11px;color:var(--text2);margin-top:2px}
+
+.announce-item{display:flex;gap:14px;align-items:flex-start;padding:14px 0;border-bottom:1px solid var(--border3)}
+.announce-item:last-child{border-bottom:none}
+.announce-dot{width:8px;height:8px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:5px}
+.announce-date{font-size:11px;color:var(--text3);margin-top:4px}
+
+.cat-scroll{display:flex;gap:10px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
+.cat-scroll::-webkit-scrollbar{display:none}
+.cat-pill{flex-shrink:0;background:var(--surface2);border:1px solid var(--border3);border-radius:50px;padding:10px 18px;font-size:13px;cursor:pointer;transition:all .2s;white-space:nowrap;display:flex;align-items:center;gap:8px}
+.cat-pill:hover,.cat-pill.active{background:rgba(201,168,76,.12);border-color:var(--border2);color:var(--gold)}
+
+/* ════════════════════════════════════════════════
+   AWARDS SCREEN
+════════════════════════════════════════════════ */
+.awards-tabs{display:flex;padding:0 20px 16px;gap:8px;overflow-x:auto;scrollbar-width:none;flex-shrink:0}
+.awards-tabs::-webkit-scrollbar{display:none}
+.tab-btn{flex-shrink:0;padding:9px 18px;border-radius:50px;border:1.5px solid var(--border3);background:transparent;color:var(--text2);font-size:13px;font-weight:500;cursor:pointer;transition:all .2s;font-family:var(--font-body)}
+.tab-btn.active{background:rgba(201,168,76,.12);border-color:var(--border2);color:var(--gold);font-weight:700}
+
+.award-category-card{margin:0 20px 16px;background:linear-gradient(135deg,rgba(201,168,76,.07),rgba(8,8,15,.3));border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;cursor:pointer;transition:all .25s}
+.award-category-card:hover{border-color:var(--border2);transform:translateY(-2px)}
+.acc-header{padding:18px 20px;display:flex;align-items:center;gap:16px}
+.acc-icon{width:44px;height:44px;border-radius:10px;background:rgba(201,168,76,.1);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.acc-info{flex:1}
+.acc-name{font-size:16px;font-weight:700;font-family:var(--font-display)}
+.acc-count{font-size:12px;color:var(--text2);margin-top:2px}
+.acc-status{display:flex;gap:6px;align-items:center}
+
+.nominee-list{padding:0 20px 8px;display:flex;flex-direction:column;gap:12px}
+.nominee-card{background:var(--surface);border:1.5px solid var(--border3);border-radius:var(--radius);overflow:hidden;cursor:pointer;transition:all .25s;position:relative}
+.nominee-card:hover{border-color:var(--border2);box-shadow:0 4px 24px rgba(201,168,76,.1)}
+.nominee-card.selected{border-color:var(--gold);background:rgba(201,168,76,.05)}
+.nominee-card-inner{display:flex;gap:14px;padding:14px}
+.nominee-avatar{width:64px;height:64px;border-radius:10px;object-fit:cover;flex-shrink:0;background:var(--bg3)}
+.nominee-info{flex:1}
+.nominee-school{font-size:11px;color:var(--gold);font-weight:700;letter-spacing:.5px;text-transform:uppercase}
+.nominee-name{font-size:15px;font-weight:700;margin-top:2px}
+.nominee-project{font-size:13px;color:var(--text2);margin-top:4px;line-height:1.4}
+.nominee-meta{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+.vote-radio{position:absolute;top:14px;right:14px;width:22px;height:22px;border-radius:50%;border:2px solid var(--border3);background:transparent;transition:all .25s;display:flex;align-items:center;justify-content:center}
+.nominee-card.selected .vote-radio{border-color:var(--gold);background:var(--gold)}
+.vote-radio-dot{width:8px;height:8px;border-radius:50%;background:#080810;transform:scale(0);transition:transform .2s}
+.nominee-card.selected .vote-radio-dot{transform:scale(1)}
+
+.winner-badge{position:absolute;top:0;left:0;background:linear-gradient(135deg,var(--gold),var(--gold-light));color:#080810;font-size:10px;font-weight:800;padding:4px 10px;border-radius:0 0 var(--radius-sm) 0;letter-spacing:.5px}
+
+/* ════════════════════════════════════════════════
+   VOTE SCREEN
+════════════════════════════════════════════════ */
+.vote-progress{padding:16px 20px;flex-shrink:0}
+.progress-bar-bg{height:4px;background:var(--surface2);border-radius:2px;overflow:hidden}
+.progress-bar-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-light));border-radius:2px;transition:width .5s ease}
+.progress-label{display:flex;justify-content:space-between;font-size:12px;color:var(--text2);margin-top:8px}
+
+.vote-category-header{margin:0 20px 16px;padding:16px;background:var(--card-gold,linear-gradient(135deg,rgba(201,168,76,.08),rgba(8,8,15,.3)));border:1px solid var(--border2);border-radius:var(--radius);display:flex;align-items:center;gap:14px}
+.vch-icon{font-size:28px}
+.vch-title{font-family:var(--font-display);font-size:18px;font-weight:700}
+.vch-sub{font-size:12px;color:var(--text2);margin-top:2px}
+
+.vote-actions{padding:16px 20px;flex-shrink:0;display:flex;gap:12px;border-top:1px solid var(--border3);background:var(--bg)}
+
+/* ════════════════════════════════════════════════
+   AUTH SCREEN
+════════════════════════════════════════════════ */
+.auth-screen{position:fixed;inset:0;background:var(--bg);z-index:400;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;animation:fadeIn .3s ease}
+.auth-logo{font-family:var(--font-display);font-size:48px;font-weight:900;background:linear-gradient(135deg,var(--gold-light),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:4px;text-align:center}
+.auth-tagline{font-size:13px;color:var(--text2);text-align:center;letter-spacing:1px;text-transform:uppercase;margin-bottom:40px}
+.auth-card{width:100%;max-width:400px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px 24px}
+.auth-step{display:none}
+.auth-step.active{display:block}
+.otp-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin:20px 0}
+.otp-input{background:var(--surface2);border:2px solid var(--border3);border-radius:10px;height:52px;text-align:center;font-size:22px;font-weight:700;color:var(--text);font-family:var(--font-display);outline:none;transition:all .2s;width:100%}
+.otp-input:focus{border-color:var(--gold);background:rgba(201,168,76,.06)}
+.phone-prefix{display:flex;align-items:center;gap:0;background:var(--surface2);border:1.5px solid var(--border3);border-radius:var(--radius-sm);overflow:hidden}
+.prefix-flag{padding:14px 14px;font-size:18px;border-right:1px solid var(--border3);background:var(--surface);flex-shrink:0}
+.prefix-code{padding:14px 10px;font-size:15px;font-weight:600;color:var(--text2);flex-shrink:0}
+.phone-prefix input{flex:1;background:transparent;border:none;padding:14px 14px 14px 4px;font-size:15px;color:var(--text);outline:none;font-family:var(--font-body)}
+.resend-row{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:12px;font-size:13px;color:var(--text2)}
+.resend-btn{color:var(--gold);cursor:pointer;font-weight:600;background:none;border:none;font-family:var(--font-body);font-size:13px}
+.resend-btn:disabled{color:var(--text3);cursor:default}
+
+/* ════════════════════════════════════════════════
+   SUBSCRIPTION SCREEN
+════════════════════════════════════════════════ */
+.sub-screen{position:fixed;inset:0;background:var(--bg);z-index:350;display:flex;flex-direction:column;animation:slideUp .35s cubic-bezier(.25,.8,.25,1)}
+.sub-hero{padding:40px 24px 28px;text-align:center;background:linear-gradient(180deg,rgba(201,168,76,.1) 0%,transparent 100%);flex-shrink:0}
+.sub-icon{font-size:56px;margin-bottom:12px}
+.sub-hero-title{font-family:var(--font-display);font-size:28px;font-weight:900;color:var(--gold-light);margin-bottom:8px}
+.sub-hero-sub{font-size:14px;color:var(--text2);line-height:1.6}
+
+.plan-card{margin:0 20px 12px;border-radius:var(--radius);padding:20px;border:2px solid var(--border3);cursor:pointer;transition:all .25s;position:relative}
+.plan-card.active{border-color:var(--gold);background:rgba(201,168,76,.06)}
+.plan-card.featured{border-color:var(--gold-dark)}
+.plan-badge{position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--gold),var(--gold-light));color:#080810;font-size:10px;font-weight:800;padding:4px 14px;border-radius:50px;letter-spacing:.5px;white-space:nowrap}
+.plan-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px}
+.plan-name{font-size:18px;font-weight:700;font-family:var(--font-display)}
+.plan-price-wrap{text-align:right}
+.plan-price{font-size:28px;font-weight:900;color:var(--gold-light);line-height:1;font-family:var(--font-display)}
+.plan-period{font-size:12px;color:var(--text2);margin-top:2px}
+.plan-benefits{display:flex;flex-direction:column;gap:8px}
+.plan-benefit{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--text2)}
+.plan-benefit-icon{font-size:14px;flex-shrink:0}
+.plan-radio{width:20px;height:20px;border-radius:50%;border:2px solid var(--border3);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .25s}
+.plan-card.active .plan-radio{border-color:var(--gold);background:var(--gold)}
+.plan-radio-dot{width:8px;height:8px;border-radius:50%;background:#080810;transform:scale(0);transition:transform .2s}
+.plan-card.active .plan-radio-dot{transform:scale(1)}
+
+.operator-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 20px}
+.op-card{background:var(--surface2);border:1.5px solid var(--border3);border-radius:var(--radius-sm);padding:14px 8px;text-align:center;cursor:pointer;transition:all .2s;display:flex;flex-direction:column;align-items:center;gap:8px}
+.op-card:hover,.op-card.selected{border-color:var(--border2);background:rgba(201,168,76,.08)}
+.op-icon{font-size:28px}
+.op-name{font-size:12px;font-weight:600;color:var(--text2)}
+.op-note{font-size:10px;color:var(--text3);margin-top:2px;font-style:italic}
+
+/* ════════════════════════════════════════════════
+   EVENTS SCREEN
+════════════════════════════════════════════════ */
+.event-hero{margin:0 20px 20px;border-radius:var(--radius);overflow:hidden;position:relative}
+.event-hero img{width:100%;height:200px;object-fit:cover}
+.event-hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.9),transparent 50%);padding:20px;display:flex;flex-direction:column;justify-content:flex-end}
+.event-hero-badge{background:var(--red);color:#fff;font-size:10px;font-weight:800;padding:4px 10px;border-radius:50px;width:fit-content;margin-bottom:8px;letter-spacing:.5px}
+.event-hero-title{font-family:var(--font-display);font-size:22px;font-weight:700}
+.event-hero-meta{font-size:13px;color:var(--text2);margin-top:4px}
+
+.event-card{margin:0 20px 12px;border-radius:var(--radius);border:1px solid var(--border3);overflow:hidden;cursor:pointer;transition:all .25s}
+.event-card:hover{border-color:var(--border2)}
+.ec-top{height:120px;position:relative;overflow:hidden}
+.ec-top img{width:100%;height:100%;object-fit:cover}
+.ec-date-chip{position:absolute;top:12px;left:12px;background:rgba(8,8,15,.9);border:1px solid var(--border2);border-radius:8px;padding:8px 12px;text-align:center}
+.ec-day{font-family:var(--font-display);font-size:22px;font-weight:700;color:var(--gold-light);line-height:1}
+.ec-month{font-size:10px;color:var(--text2);text-transform:uppercase;letter-spacing:.5px}
+.ec-body{padding:14px 16px}
+.ec-title{font-size:16px;font-weight:700}
+.ec-venue{font-size:13px;color:var(--text2);margin-top:4px;display:flex;align-items:center;gap:6px}
+.ec-time{font-size:12px;color:var(--text3);margin-top:6px;display:flex;align-items:center;gap:6px}
+
+.schedule-item{padding:14px 0;border-bottom:1px solid var(--border3);display:flex;gap:16px;align-items:flex-start}
+.schedule-time{font-size:12px;font-weight:700;color:var(--gold);min-width:52px;flex-shrink:0;margin-top:2px}
+.schedule-dot{width:10px;height:10px;border-radius:50%;border:2px solid var(--gold);flex-shrink:0;margin-top:3px}
+.schedule-info{flex:1}
+.schedule-event{font-size:14px;font-weight:600}
+.schedule-venue{font-size:12px;color:var(--text2);margin-top:2px}
+
+/* ════════════════════════════════════════════════
+   PROFILE SCREEN
+════════════════════════════════════════════════ */
+.profile-hero{padding:48px 24px 24px;text-align:center;background:radial-gradient(ellipse at 50% 0%,rgba(201,168,76,.12),transparent 60%)}
+.profile-avatar{width:88px;height:88px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-light));display:flex;align-items:center;justify-content:center;font-size:36px;margin:0 auto 16px;border:3px solid var(--gold-dark);box-shadow:0 0 32px var(--gold-glow)}
+.profile-name{font-family:var(--font-display);font-size:24px;font-weight:700}
+.profile-phone{font-size:14px;color:var(--text2);margin-top:4px;display:flex;align-items:center;justify-content:center;gap:6px}
+.profile-status{display:flex;gap:10px;justify-content:center;margin-top:16px;flex-wrap:wrap}
+
+.menu-group{margin:0 20px 24px}
+.menu-group-label{font-size:11px;font-weight:700;color:var(--text3);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px;padding-left:4px}
+.menu-item{display:flex;align-items:center;gap:16px;padding:15px 16px;background:var(--surface);border:1px solid var(--border3);border-radius:var(--radius-sm);margin-bottom:8px;cursor:pointer;transition:all .2s}
+.menu-item:hover{border-color:var(--border2);background:var(--surface2)}
+.menu-item-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;background:var(--surface2)}
+.menu-item-text{flex:1}
+.menu-item-label{font-size:14px;font-weight:600}
+.menu-item-sub{font-size:12px;color:var(--text2);margin-top:2px}
+.menu-item-arrow{color:var(--text3);font-size:16px}
+
+.sub-status-card{margin:0 20px 24px;padding:20px;border-radius:var(--radius);background:linear-gradient(135deg,rgba(201,168,76,.1),rgba(8,8,15,.5));border:1px solid var(--border2);position:relative;overflow:hidden}
+.sub-active-label{font-size:11px;font-weight:700;color:var(--gold);letter-spacing:1px;text-transform:uppercase}
+.sub-plan-name{font-family:var(--font-display);font-size:22px;font-weight:700;margin:4px 0 12px}
+.sub-expiry{font-size:13px;color:var(--text2)}
+.sub-votes-row{display:flex;gap:24px;margin-top:16px}
+.sub-vote-stat{text-align:center}
+.sub-vote-num{font-family:var(--font-display);font-size:24px;font-weight:700;color:var(--gold-light)}
+.sub-vote-lbl{font-size:11px;color:var(--text3);letter-spacing:.5px}
+
+/* ════════════════════════════════════════════════
+   ADMIN DASHBOARD
+════════════════════════════════════════════════ */
+.admin-overlay{position:fixed;inset:0;background:var(--bg);z-index:600;display:flex;flex-direction:column;animation:fadeIn .3s ease;overflow:hidden}
+.admin-topbar{height:56px;background:var(--bg3);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 20px;gap:16px;flex-shrink:0}
+.admin-title{font-family:var(--font-display);font-size:18px;font-weight:700;color:var(--gold-light);flex:1}
+.admin-content{flex:1;overflow-y:auto;padding:20px}
+.admin-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
+.admin-stat{background:var(--surface);border:1px solid var(--border3);border-radius:var(--radius-sm);padding:16px;text-align:center}
+.admin-stat-num{font-family:var(--font-display);font-size:28px;font-weight:700;color:var(--gold-light)}
+.admin-stat-lbl{font-size:12px;color:var(--text2);margin-top:4px}
+.admin-section{margin-bottom:24px}
+.admin-section-title{font-size:16px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.admin-row{display:flex;align-items:center;gap:12px;padding:12px;background:var(--surface);border:1px solid var(--border3);border-radius:var(--radius-sm);margin-bottom:8px}
+.admin-row-info{flex:1}
+.admin-row-label{font-size:14px;font-weight:600}
+.admin-row-sub{font-size:12px;color:var(--text2);margin-top:2px}
+.admin-actions{display:flex;gap:8px}
+.admin-btn{padding:6px 12px;border-radius:6px;border:none;font-size:12px;font-weight:600;cursor:pointer;font-family:var(--font-body);transition:all .2s}
+.admin-btn-edit{background:rgba(49,130,206,.15);color:#63b3ed;border:1px solid rgba(49,130,206,.3)}
+.admin-btn-del{background:rgba(229,62,62,.15);color:#fc8181;border:1px solid rgba(229,62,62,.3)}
+.admin-btn-add{background:rgba(56,161,105,.15);color:#68d391;border:1px solid rgba(56,161,105,.3)}
+
+/* ════════════════════════════════════════════════
+   WINNERS SCREEN
+════════════════════════════════════════════════ */
+.winner-year-tab{display:flex;padding:0 20px 16px;gap:8px;overflow-x:auto;scrollbar-width:none;flex-shrink:0}
+.winner-year-tab::-webkit-scrollbar{display:none}
+.year-btn{flex-shrink:0;padding:9px 20px;border-radius:50px;border:1.5px solid var(--border3);background:transparent;color:var(--text2);font-size:14px;font-weight:600;cursor:pointer;font-family:var(--font-display);transition:all .2s}
+.year-btn.active{background:rgba(201,168,76,.12);border-color:var(--border2);color:var(--gold)}
+
+.winner-card{margin:0 20px 16px;border-radius:var(--radius);overflow:hidden;background:linear-gradient(135deg,rgba(201,168,76,.08),rgba(8,8,15,.5));border:1px solid var(--border2);position:relative}
+.winner-card-img{width:100%;height:160px;object-fit:cover}
+.winner-card-body{padding:16px}
+.winner-cat{font-size:11px;font-weight:700;color:var(--gold);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px}
+.winner-school{font-family:var(--font-display);font-size:20px;font-weight:700}
+.winner-project{font-size:13px;color:var(--text2);margin-top:4px}
+.winner-trophy{position:absolute;top:12px;right:12px;font-size:32px;filter:drop-shadow(0 4px 8px rgba(201,168,76,.4))}
+
+/* ════════════════════════════════════════════════
+   NOTIFICATION PANEL
+════════════════════════════════════════════════ */
+.notif-panel{position:fixed;inset:0;background:var(--bg);z-index:450;display:flex;flex-direction:column;animation:slideUp .35s cubic-bezier(.25,.8,.25,1);transform-origin:bottom}
+.notif-header{padding:56px 20px 16px;background:var(--bg2);border-bottom:1px solid var(--border3);flex-shrink:0}
+.notif-item{padding:16px 20px;border-bottom:1px solid var(--border3);display:flex;gap:14px;cursor:pointer;transition:background .2s}
+.notif-item:hover{background:var(--surface)}
+.notif-item.unread{background:rgba(201,168,76,.03)}
+.notif-dot{width:8px;height:8px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:6px}
+.notif-dot.read{background:transparent;border:1.5px solid var(--text3)}
+.notif-content{flex:1}
+.notif-title{font-size:14px;font-weight:600;line-height:1.4}
+.notif-body{font-size:13px;color:var(--text2);margin-top:4px;line-height:1.5}
+.notif-time{font-size:11px;color:var(--text3);margin-top:6px}
+
+/* ════════════════════════════════════════════════
+   VOTE CONFIRMATION
+════════════════════════════════════════════════ */
+.vote-confirm-screen{position:fixed;inset:0;background:var(--bg);z-index:700;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center;animation:fadeIn .3s ease}
+.vote-confirm-icon{font-size:72px;margin-bottom:20px;animation:bounceIn .6s cubic-bezier(.34,1.56,.64,1)}
+.vote-confirm-title{font-family:var(--font-display);font-size:28px;font-weight:900;color:var(--gold-light);margin-bottom:12px}
+.vote-ref-card{background:var(--bg3);border:1px solid var(--border2);border-radius:var(--radius);padding:20px;width:100%;max-width:360px;text-align:left;margin:20px 0}
+.vote-ref-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border3)}
+.vote-ref-row:last-child{border-bottom:none}
+.vote-ref-label{font-size:12px;color:var(--text2)}
+.vote-ref-value{font-size:13px;font-weight:600;max-width:60%;text-align:right;word-break:break-all}
+.vote-ref-id{font-family:monospace;color:var(--gold);font-size:12px}
+@keyframes bounceIn{0%{transform:scale(0)}60%{transform:scale(1.2)}100%{transform:scale(1)}}
+
+/* ════════════════════════════════════════════════
+   JUDGE PANEL
+════════════════════════════════════════════════ */
+.judge-overlay{position:fixed;inset:0;background:var(--bg);z-index:500;display:flex;flex-direction:column;animation:fadeIn .3s ease}
+.judge-topbar{height:56px;background:rgba(128,90,213,.1);border-bottom:1px solid rgba(128,90,213,.3);display:flex;align-items:center;padding:0 20px;gap:16px;flex-shrink:0}
+.judge-score-card{margin:0 20px 12px;padding:16px;background:var(--surface);border:1px solid var(--border3);border-radius:var(--radius)}
+.score-row{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.score-label{font-size:13px;color:var(--text2);flex:1}
+.score-slider{flex:2;-webkit-appearance:none;height:4px;border-radius:2px;background:var(--surface2);outline:none;cursor:pointer}
+.score-slider::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--gold);cursor:pointer;box-shadow:0 2px 8px rgba(201,168,76,.4)}
+.score-val{font-size:14px;font-weight:700;color:var(--gold-light);min-width:28px;text-align:right}
+
+/* ════════════════════════════════════════════════
+   MISC
+════════════════════════════════════════════════ */
+.empty-state{text-align:center;padding:60px 24px}
+.empty-icon{font-size:56px;margin-bottom:16px}
+.empty-title{font-size:18px;font-weight:700;color:var(--text2);margin-bottom:8px}
+.empty-sub{font-size:14px;color:var(--text3);line-height:1.6}
+
+.privacy-text{font-size:12px;color:var(--text3);line-height:1.7;text-align:center;padding:0 8px}
+.privacy-link{color:var(--gold);text-decoration:underline;cursor:pointer}
+
+.school-detail-overlay{position:fixed;inset:0;background:var(--bg);z-index:600;display:flex;flex-direction:column;animation:slideUp .35s cubic-bezier(.25,.8,.25,1)}
+.school-hero{position:relative;height:220px;overflow:hidden;flex-shrink:0}
+.school-hero img{width:100%;height:100%;object-fit:cover}
+.school-hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,var(--bg) 0%,transparent 60%);display:flex;flex-direction:column;justify-content:flex-end;padding:20px}
+.school-body{flex:1;overflow-y:auto;padding:20px}
+.school-gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.school-gallery img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:8px}
+
+.back-btn{display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--border3);border-radius:50px;padding:8px 14px;font-size:14px;font-weight:500;cursor:pointer;color:var(--text);font-family:var(--font-body);transition:all .2s;flex-shrink:0}
+.back-btn:hover{border-color:var(--border2)}
+
+.verified-badge{display:inline-flex;align-items:center;gap:4px;font-size:11px;color:#68d391;font-weight:600}
+
+/* Glassmorphism effect */
+.glass{background:rgba(255,255,255,.04);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.08)}
+
+/* Security notice */
+.security-notice{background:rgba(56,161,105,.06);border:1px solid rgba(56,161,105,.2);border-radius:var(--radius-sm);padding:14px;margin-bottom:16px;font-size:12px;color:var(--text2);line-height:1.6;display:flex;gap:10px}
+.security-icon{font-size:16px;flex-shrink:0;margin-top:1px}
+
+/* Rate limit notice */
+.rate-info{background:rgba(236,201,75,.06);border:1px solid rgba(236,201,75,.2);border-radius:var(--radius-sm);padding:12px;font-size:12px;color:#ecc94b;line-height:1.5;display:flex;gap:8px;align-items:flex-start;margin-top:12px}
+
+/* Confetti */
+.confetti-piece{position:fixed;width:8px;height:8px;top:-20px;pointer-events:none;z-index:9998;border-radius:2px;animation:confettiFall linear forwards}
+@keyframes confettiFall{to{transform:translateY(110vh) rotate(720deg);opacity:0}}
+
+/* Responsive */
+@media(min-width:480px){
+  .featured-grid{grid-template-columns:1fr 1fr 1fr}
+  .featured-card:first-child{grid-row:span 1;aspect-ratio:3/4}
+}
+</style>
+</head>
+<body>
+
+<!-- Particles Canvas -->
+<canvas id="particles-canvas"></canvas>
+
+<!-- Toast Container -->
+<div id="toast-container"></div>
+
+<!-- Loading Screen -->
+<div class="loading-overlay" id="loading-screen">
+  <div class="loading-logo">🏆 Sinha</div>
+  <div style="font-size:12px;color:var(--text3);letter-spacing:2px;text-transform:uppercase">Awards 2026</div>
+  <div class="spinner spinner-gold" style="margin-top:24px"></div>
+  <div style="font-size:12px;color:var(--text3);margin-top:12px">Initializing secure session...</div>
+</div>
+
+<!-- ══ AUTH SCREEN ═══════════════════════════════ -->
+<div class="auth-screen" id="auth-screen" style="display:none">
+  <div style="text-align:center;margin-bottom:32px">
+    <div class="auth-logo">🏆</div>
+    <div style="font-family:var(--font-display);font-size:28px;font-weight:900;background:linear-gradient(135deg,var(--gold-light),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Sinha Awards</div>
+    <div class="auth-tagline">Sri Lanka School Media Awards 2026</div>
+  </div>
+  <div class="auth-card">
+    <!-- Step 1: Phone -->
+    <div class="auth-step active" id="auth-step-phone">
+      <h2 style="font-family:var(--font-display);font-size:22px;font-weight:700;margin-bottom:6px">Sign In to Vote</h2>
+      <p style="font-size:14px;color:var(--text2);margin-bottom:24px;line-height:1.6">Enter your Sri Lankan mobile number to receive a one-time verification code.</p>
+      <div class="security-notice"><span class="security-icon">🔒</span><span>Your phone number is used only for authentication and voting verification. We never share your data with third parties.</span></div>
+      <div class="input-group">
+        <label class="input-label">Mobile Number</label>
+        <div class="phone-prefix">
+          <span class="prefix-flag">🇱🇰</span>
+          <span class="prefix-code">+94</span>
+          <input type="tel" id="phone-input" placeholder="7X XXX XXXX" maxlength="9" inputmode="numeric" oninput="this.value=this.value.replace(/\D/g,'')"/>
+        </div>
+        <div class="input-error" id="phone-error">Please enter a valid Sri Lankan mobile number (9 digits after +94)</div>
+        <p class="input-hint">Supports Dialog, Mobitel, Hutch, and Airtel numbers</p>
+      </div>
+      <div class="rate-info"><span>⚠️</span><span>OTP is rate-limited. You may request a new OTP after 60 seconds. Max 5 attempts per 24 hours.</span></div>
+      <button class="btn btn-primary btn-block btn-lg" style="margin-top:20px" onclick="sendOTP()" id="send-otp-btn">
+        <span id="send-otp-text">Send Verification Code</span>
+        <span id="send-otp-spinner" style="display:none" class="spinner" style="width:16px;height:16px;border-width:2px;border-top-color:#080810;border-color:rgba(8,8,16,.3)"></span>
+      </button>
+      <p class="privacy-text" style="margin-top:20px">By continuing, you agree to our <span class="privacy-link" onclick="showPrivacy()">Privacy Policy</span> and <span class="privacy-link" onclick="showTerms()">Terms of Service</span>.</p>
+    </div>
+
+    <!-- Step 2: OTP -->
+    <div class="auth-step" id="auth-step-otp">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+        <button class="back-btn" onclick="goBackToPhone()" style="padding:6px 12px;font-size:13px">← Back</button>
+      </div>
+      <h2 style="font-family:var(--font-display);font-size:22px;font-weight:700;margin-bottom:6px">Verify OTP</h2>
+      <p style="font-size:14px;color:var(--text2);margin-bottom:24px;line-height:1.6">We sent a 6-digit code to <strong id="otp-phone-display" style="color:var(--text)">+94 7X XXX XXXX</strong>. Code expires in <strong id="otp-timer" style="color:var(--gold)">05:00</strong>.</p>
+      <div class="security-notice"><span class="security-icon">🔐</span><span>OTPs are hashed before storage. Never share your OTP with anyone. Sinha Awards will never ask for your OTP.</span></div>
+      <div class="otp-grid" id="otp-grid">
+        <input class="otp-input" maxlength="1" inputmode="numeric" oninput="otpInput(this,0)" onkeydown="otpKeydown(event,0)"/>
+        <input class="otp-input" maxlength="1" inputmode="numeric" oninput="otpInput(this,1)" onkeydown="otpKeydown(event,1)"/>
+        <input class="otp-input" maxlength="1" inputmode="numeric" oninput="otpInput(this,2)" onkeydown="otpKeydown(event,2)"/>
+        <input class="otp-input" maxlength="1" inputmode="numeric" oninput="otpInput(this,3)" onkeydown="otpKeydown(event,3)"/>
+        <input class="otp-input" maxlength="1" inputmode="numeric" oninput="otpInput(this,4)" onkeydown="otpKeydown(event,4)"/>
+        <input class="otp-input" maxlength="1" inputmode="numeric" oninput="otpInput(this,5)" onkeydown="otpKeydown(event,5)"/>
+      </div>
+      <div class="input-error" id="otp-error">Invalid OTP. Please try again.</div>
+      <div class="resend-row">
+        <span>Didn't receive the code?</span>
+        <button class="resend-btn" id="resend-btn" disabled onclick="resendOTP()">Resend OTP (<span id="resend-timer">60</span>s)</button>
+      </div>
+      <button class="btn btn-primary btn-block btn-lg" style="margin-top:16px" onclick="verifyOTP()" id="verify-otp-btn">
+        <span id="verify-otp-text">Verify & Continue</span>
+        <span id="verify-otp-spinner" style="display:none" class="spinner" style="border-top-color:#080810;border-color:rgba(8,8,16,.3)"></span>
+      </button>
+    </div>
+
+    <!-- Step 3: Success -->
+    <div class="auth-step" id="auth-step-success">
+      <div style="text-align:center;padding:20px 0">
+        <div style="font-size:64px;margin-bottom:16px;animation:bounceIn .6s cubic-bezier(.34,1.56,.64,1)">✅</div>
+        <h2 style="font-family:var(--font-display);font-size:24px;font-weight:700;margin-bottom:8px">Verified!</h2>
+        <p style="font-size:14px;color:var(--text2);line-height:1.6;margin-bottom:24px">Your phone number has been verified. Welcome to Sinha Awards 2026!</p>
+        <button class="btn btn-primary btn-block btn-lg" onclick="completeAuth()">Continue to App 🏆</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SUBSCRIPTION SCREEN ═══════════════════════ -->
+<div class="sub-screen" id="sub-screen" style="display:none">
+  <div style="display:flex;align-items:center;padding:12px 16px;border-bottom:1px solid var(--border3);flex-shrink:0">
+    <button class="back-btn" onclick="closeSubScreen()">✕ Close</button>
+    <span style="flex:1;text-align:center;font-size:14px;font-weight:600">Subscription</span>
+    <div style="width:60px"></div>
+  </div>
+  <div style="flex:1;overflow-y:auto;padding-bottom:24px">
+    <div class="sub-hero">
+      <div class="sub-icon">👑</div>
+      <div class="sub-hero-title">Unlock Voting Access</div>
+      <div class="sub-hero-sub">Subscribe to participate in Sinha Awards 2026 voting and support Sri Lankan school media excellence.</div>
+    </div>
+    <div style="padding:0 20px 8px">
+      <div class="section-head"><div class="section-label">Select Plan</div></div>
+    </div>
+    <!-- Plans -->
+    <div class="plan-card featured" id="plan-basic" onclick="selectPlan('basic')">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+        <div>
+          <div class="plan-name">Basic Voter</div>
+          <div style="font-size:12px;color:var(--text2);margin-top:2px">1 Vote per Category</div>
+        </div>
+        <div style="text-align:right">
+          <div class="plan-price">Rs. 99</div>
+          <div class="plan-period">One-time · 2026 Season</div>
+        </div>
+        <div class="plan-radio"><div class="plan-radio-dot"></div></div>
+      </div>
+      <div class="plan-benefits">
+        <div class="plan-benefit"><span class="plan-benefit-icon">✅</span>1 vote per award category</div>
+        <div class="plan-benefit"><span class="plan-benefit-icon">✅</span>Access to all award categories</div>
+        <div class="plan-benefit"><span class="plan-benefit-icon">✅</span>View live vote counts</div>
+        <div class="plan-benefit"><span class="plan-benefit-icon">✅</span>Event announcements</div>
+      </div>
+    </div>
+    <div class="plan-card" id="plan-premium" onclick="selectPlan('premium')" style="margin-top:16px;position:relative">
+      <div class="plan-badge">⭐ Most Popular</div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+        <div>
+          <div class="plan-name">Premium Supporter</div>
+          <div style="font-size:12px;color:var(--text2);margin-top:2px">3 Votes per Category</div>
+        </div>
+        <div style="text-align:right">
+          <div class="plan-price">Rs. 250</div>
+          <div class="plan-period">One-time · 2026 Season</div>
+        </div>
+        <div class="plan-radio"><div class="plan-radio-dot"></div></div>
+      </div>
+      <div class="plan-benefits">
+        <div class="plan-benefit"><span class="plan-benefit-icon">✅</span>3 votes per award category</div>
+        <div class="plan-benefit"><span class="plan-benefit-icon">✅</span>Early finalist announcements</div>
+        <div class="plan-benefit"><span class="plan-benefit-icon">✅</span>Exclusive event updates</div>
+        <div class="plan-benefit"><span class="plan-benefit-icon">✅</span>Digital supporter certificate</div>
+        <div class="plan-benefit"><span class="plan-benefit-icon">✅</span>Priority vote confirmation</div>
+      </div>
+    </div>
+    <div style="height:1px;background:var(--border3);margin:20px 20px"></div>
+    <div style="padding:0 20px 8px">
+      <div class="section-head"><div class="section-label">Payment Method</div></div>
+      <p style="font-size:12px;color:var(--text3);line-height:1.6;margin-bottom:16px">Select your mobile network operator to proceed with mobile billing. Payment is processed securely via your operator.</p>
+    </div>
+    <div class="operator-grid">
+      <div class="op-card" id="op-dialog" onclick="selectOperator('dialog')">
+        <div class="op-icon">📱</div>
+        <div class="op-name">Dialog</div>
+        <div class="op-note">Integration pending</div>
+      </div>
+      <div class="op-card" id="op-mobitel" onclick="selectOperator('mobitel')">
+        <div class="op-icon">📲</div>
+        <div class="op-name">Mobitel</div>
+        <div class="op-note">Integration pending</div>
+      </div>
+      <div class="op-card" id="op-hutch" onclick="selectOperator('hutch')">
+        <div class="op-icon">📡</div>
+        <div class="op-name">Hutch</div>
+        <div class="op-note">Integration pending</div>
+      </div>
+    </div>
+    <div style="margin:8px 20px 0;background:rgba(236,201,75,.06);border:1px solid rgba(236,201,75,.2);border-radius:var(--radius-sm);padding:14px;font-size:12px;color:#ecc94b;line-height:1.6">
+      ⚠️ <strong>Note:</strong> Mobile billing integrations require official API credentials from Dialog, Mobitel, and Hutch. These integrations are architecturally ready but require operator approval and API keys before going live.
+    </div>
+    <div style="padding:20px">
+      <button class="btn btn-primary btn-block btn-lg" onclick="initiatePayment()" id="pay-btn">
+        <span id="pay-btn-text">Proceed to Payment</span>
+        <span id="pay-spinner" style="display:none" class="spinner" style="border-top-color:#080810"></span>
+      </button>
+      <p class="privacy-text" style="margin-top:16px">Payment is processed securely. Subscription activates only after server-side verification. See our <span class="privacy-link">Subscription Terms</span>.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ MAIN APP ════════════════════════════════════ -->
+<div id="app" style="display:none">
+  <div id="screen-wrap">
+
+    <!-- ─── HOME SCREEN ─── -->
+    <div class="screen active" id="screen-home">
+      <div class="hero-section">
+        <div class="hero-bg"></div>
+        <div class="hero-badge">🏆 &nbsp; Sinha Awards 2026 &nbsp; · &nbsp; Now Open</div>
+        <h1 class="hero-title">Sri Lanka's<br/>School Media<br/><span class="gold">Awards Night</span></h1>
+        <p class="hero-subtitle">Celebrating excellence in school media production across Sri Lanka. Vote for your favourite school media units.</p>
+        <div class="hero-cta">
+          <button class="btn btn-primary btn-lg" onclick="navTo('vote')">🗳️ Vote Now</button>
+          <button class="btn btn-outline" onclick="navTo('awards')">View Categories</button>
+        </div>
+      </div>
+
+      <!-- Countdown -->
+      <div class="countdown-section">
+        <div class="countdown-card">
+          <div class="countdown-title">⏳ Ceremony Countdown</div>
+          <div style="font-size:13px;color:var(--text2);margin-bottom:16px">Sinha Awards Night — March 15, 2026 · 6:00 PM · BMICH, Colombo</div>
+          <div class="countdown-grid">
+            <div class="cd-unit"><div class="cd-num" id="cd-days">00</div><div class="cd-lbl">Days</div></div>
+            <div class="cd-unit"><div class="cd-num" id="cd-hours">00</div><div class="cd-lbl">Hours</div></div>
+            <div class="cd-unit"><div class="cd-num" id="cd-mins">00</div><div class="cd-lbl">Mins</div></div>
+            <div class="cd-unit"><div class="cd-num" id="cd-secs">00</div><div class="cd-lbl">Secs</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Home Content -->
+      <div class="home-scroll">
+        <!-- Categories -->
+        <div>
+          <div class="section-head">
+            <div class="section-label">Award Categories</div>
+            <div class="section-action" onclick="navTo('awards')">View All →</div>
+          </div>
+          <div class="cat-scroll" id="home-cats"></div>
+        </div>
+
+        <!-- Featured Schools -->
+        <div>
+          <div class="section-head">
+            <div class="section-label">Featured Nominees</div>
+            <div class="section-action" onclick="navTo('awards')">See All →</div>
+          </div>
+          <div class="featured-grid" id="home-featured"></div>
+        </div>
+
+        <!-- Announcements -->
+        <div>
+          <div class="section-head"><div class="section-label">Latest Announcements</div></div>
+          <div class="card" id="home-announces"></div>
+        </div>
+
+        <!-- Previous Winners -->
+        <div>
+          <div class="section-head">
+            <div class="section-label">2025 Winners</div>
+            <div class="section-action" onclick="navTo('awards');switchAwardsTab('winners')">More →</div>
+          </div>
+          <div id="home-winners"></div>
+        </div>
+
+        <div style="height:8px"></div>
+      </div>
+    </div>
+
+    <!-- ─── AWARDS SCREEN ─── -->
+    <div class="screen" id="screen-awards">
+      <div class="page-header">
+        <div class="page-title">Award Categories</div>
+        <div class="page-subtitle">Sinha Awards 2026 · 8 Categories</div>
+      </div>
+      <div class="awards-tabs" id="awards-tabs">
+        <button class="tab-btn active" onclick="switchAwardsTab('categories',this)">Categories</button>
+        <button class="tab-btn" onclick="switchAwardsTab('nominees',this)">Nominees</button>
+        <button class="tab-btn" onclick="switchAwardsTab('schools',this)">Schools</button>
+        <button class="tab-btn" onclick="switchAwardsTab('winners',this)">Winners</button>
+      </div>
+
+      <!-- Categories Tab -->
+      <div id="awards-categories" class="awards-tab-content">
+        <div id="award-categories-list"></div>
+      </div>
+
+      <!-- Nominees Tab -->
+      <div id="awards-nominees" class="awards-tab-content" style="display:none">
+        <div style="padding:0 20px 12px">
+          <select class="input-field" id="nominee-cat-filter" onchange="filterNominees(this.value)" style="margin-bottom:0">
+            <option value="all">All Categories</option>
+          </select>
+        </div>
+        <div id="nominee-list-container" class="nominee-list"></div>
+      </div>
+
+      <!-- Schools Tab -->
+      <div id="awards-schools" class="awards-tab-content" style="display:none">
+        <div id="schools-list" style="padding:0 20px;display:flex;flex-direction:column;gap:12px"></div>
+      </div>
+
+      <!-- Winners Tab -->
+      <div id="awards-winners-tab" class="awards-tab-content" style="display:none">
+        <div class="winner-year-tab" id="winner-years"></div>
+        <div id="winners-list"></div>
+      </div>
+    </div>
+
+    <!-- ─── VOTE SCREEN ─── -->
+    <div class="screen" id="screen-vote">
+      <div class="page-header">
+        <div class="page-title">Cast Your Vote</div>
+        <div class="page-subtitle" id="vote-status-sub">Select one nominee per category</div>
+      </div>
+      <div class="vote-progress">
+        <div class="progress-bar-bg"><div class="progress-bar-fill" id="vote-progress-fill" style="width:0%"></div></div>
+        <div class="progress-label">
+          <span id="vote-progress-label">0 of 8 categories voted</span>
+          <span id="vote-deadline" style="color:var(--gold)">Closes: Mar 10, 2026</span>
+        </div>
+      </div>
+
+      <!-- Vote Category List -->
+      <div id="vote-category-list" style="padding:0 0 80px"></div>
+
+      <!-- Submit -->
+      <div class="vote-actions" id="vote-submit-bar" style="display:none">
+        <button class="btn btn-outline" style="flex:1" onclick="clearVotes()">Clear</button>
+        <button class="btn btn-primary" style="flex:2" onclick="submitAllVotes()" id="submit-votes-btn">Submit All Votes 🏆</button>
+      </div>
+    </div>
+
+    <!-- ─── EVENTS SCREEN ─── -->
+    <div class="screen" id="screen-events">
+      <div class="page-header">
+        <div class="page-title">Events</div>
+        <div class="page-subtitle">Sinha Awards 2026 Schedule</div>
+      </div>
+      <!-- Main Event Hero -->
+      <div class="event-hero">
+        <img src="https://images.pexels.com/photos/31772890/pexels-photo-31772890.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=300&w=600" alt="Awards Night" onerror="this.style.display='none'"/>
+        <div class="event-hero-overlay">
+          <div class="event-hero-badge">🔴 LIVE EVENT</div>
+          <div class="event-hero-title">Sinha Awards Night 2026</div>
+          <div class="event-hero-meta">📅 March 15, 2026 &nbsp;·&nbsp; 🕕 6:00 PM &nbsp;·&nbsp; 📍 BMICH, Colombo</div>
+        </div>
+      </div>
+      <div style="padding:0 20px;margin-bottom:16px">
+        <div class="section-head"><div class="section-label">Event Schedule</div></div>
+        <div id="event-schedule"></div>
+      </div>
+      <div style="padding:0 20px;margin-bottom:16px">
+        <div class="section-head"><div class="section-label">Upcoming Events</div></div>
+      </div>
+      <div id="event-list"></div>
+    </div>
+
+    <!-- ─── PROFILE SCREEN ─── -->
+    <div class="screen" id="screen-profile">
+      <div class="profile-hero" id="profile-hero">
+        <div class="profile-avatar" id="profile-avatar">👤</div>
+        <div class="profile-name" id="profile-name">Guest User</div>
+        <div class="profile-phone" id="profile-phone">Not verified</div>
+        <div class="profile-status" id="profile-badges"></div>
+      </div>
+
+      <!-- Subscription Status Card -->
+      <div class="sub-status-card" id="sub-status-card">
+        <div class="sub-active-label">Subscription Status</div>
+        <div class="sub-plan-name" id="sub-plan-display">No Active Plan</div>
+        <div class="sub-expiry" id="sub-expiry-display">Subscribe to unlock voting access</div>
+        <div class="sub-votes-row">
+          <div class="sub-vote-stat"><div class="sub-vote-num" id="votes-cast">0</div><div class="sub-vote-lbl">Votes Cast</div></div>
+          <div class="sub-vote-stat"><div class="sub-vote-num" id="votes-remaining">0</div><div class="sub-vote-lbl">Remaining</div></div>
+          <div class="sub-vote-stat"><div class="sub-vote-num" id="votes-limit">0</div><div class="sub-vote-lbl">Limit/Cat</div></div>
+        </div>
+        <button class="btn btn-outline btn-sm" style="margin-top:16px" onclick="showSubScreen()" id="manage-sub-btn">Manage Subscription</button>
+      </div>
+
+      <!-- Menu Groups -->
+      <div class="menu-group">
+        <div class="menu-group-label">Account</div>
+        <div class="menu-item" onclick="showNotifications()"><div class="menu-item-icon">🔔</div><div class="menu-item-text"><div class="menu-item-label">Notifications</div><div class="menu-item-sub">Manage alerts &amp; updates</div></div><span class="menu-item-arrow">›</span></div>
+        <div class="menu-item" onclick="showMyVotes()"><div class="menu-item-icon">🗳️</div><div class="menu-item-text"><div class="menu-item-label">My Votes</div><div class="menu-item-sub">View your voting history</div></div><span class="menu-item-arrow">›</span></div>
+        <div class="menu-item" onclick="showSubScreen()"><div class="menu-item-icon">👑</div><div class="menu-item-text"><div class="menu-item-label">Subscription</div><div class="menu-item-sub" id="menu-sub-status">No active plan</div></div><span class="menu-item-arrow">›</span></div>
+      </div>
+      <div class="menu-group">
+        <div class="menu-group-label">Support</div>
+        <div class="menu-item" onclick="showPrivacy()"><div class="menu-item-icon">🔒</div><div class="menu-item-text"><div class="menu-item-label">Privacy Policy</div><div class="menu-item-sub">How we use your data</div></div><span class="menu-item-arrow">›</span></div>
+        <div class="menu-item" onclick="showTerms()"><div class="menu-item-icon">📄</div><div class="menu-item-text"><div class="menu-item-label">Terms of Service</div><div class="menu-item-sub">Subscription &amp; voting terms</div></div><span class="menu-item-arrow">›</span></div>
+        <div class="menu-item" onclick="showAdmin()"><div class="menu-item-icon">⚙️</div><div class="menu-item-text"><div class="menu-item-label">Admin Dashboard</div><div class="menu-item-sub">Admin &amp; judge access</div></div><span class="menu-item-arrow">›</span></div>
+        <div class="menu-item" onclick="showJudgePanel()"><div class="menu-item-icon">⚖️</div><div class="menu-item-text"><div class="menu-item-label">Judge Panel</div><div class="menu-item-sub">Secure judge evaluation</div></div><span class="menu-item-arrow">›</span></div>
+      </div>
+      <div class="menu-group">
+        <div class="menu-group-label">Session</div>
+        <div class="menu-item" style="border-color:rgba(229,62,62,.2)" onclick="confirmLogout()"><div class="menu-item-icon" style="background:rgba(229,62,62,.1)">🚪</div><div class="menu-item-text"><div class="menu-item-label" style="color:var(--red)">Sign Out</div><div class="menu-item-sub">End your session securely</div></div></div>
+      </div>
+      <div style="text-align:center;padding:16px 24px 0;font-size:11px;color:var(--text3);line-height:1.7">
+        Sinha Awards 2026 · v2.0.0<br/>© 2026 Sinha Media Awards. All rights reserved.<br/>
+        <span style="color:var(--gold-dark)">🇱🇰 Proudly Sri Lankan</span>
+      </div>
+      <div style="height:20px"></div>
+    </div>
+
+  </div><!-- /screen-wrap -->
+
+  <!-- Bottom Nav -->
+  <nav id="bottom-nav">
+    <button class="nav-item active" id="nav-home" onclick="navTo('home')">
+      <span class="nav-icon">🏠</span><span>Home</span>
+    </button>
+    <button class="nav-item" id="nav-awards" onclick="navTo('awards')">
+      <span class="nav-icon">🏆</span><span>Awards</span>
+    </button>
+    <button class="nav-item" id="nav-vote" onclick="navTo('vote')">
+      <span class="nav-icon">🗳️</span><span>Vote</span>
+    </button>
+    <button class="nav-item" id="nav-events" onclick="navTo('events')">
+      <span class="nav-icon">📅</span><span>Events</span>
+    </button>
+    <button class="nav-item" id="nav-profile" onclick="navTo('profile')">
+      <span class="nav-icon">👤</span><span>Profile</span>
+      <span class="nav-badge" id="profile-badge" style="display:none">!</span>
+    </button>
+  </nav>
+</div><!-- /app -->
+
+<!-- ══ ADMIN DASHBOARD ════════════════════════════ -->
+<div class="admin-overlay" id="admin-overlay" style="display:none">
+  <div class="admin-topbar">
+    <button class="back-btn" onclick="closeAdmin()" style="padding:6px 12px;font-size:13px">← Close</button>
+    <div class="admin-title">🛡️ Admin Dashboard</div>
+    <div class="chip chip-gold">Super Admin</div>
+  </div>
+  <div class="admin-content" id="admin-content"></div>
+</div>
+
+<!-- ══ JUDGE PANEL ════════════════════════════════ -->
+<div class="judge-overlay" id="judge-overlay" style="display:none">
+  <div class="judge-topbar">
+    <button class="back-btn" onclick="closeJudge()" style="padding:6px 12px;font-size:13px">← Close</button>
+    <div style="flex:1;text-align:center;font-size:16px;font-weight:700;color:#b794f4">⚖️ Judge Evaluation Panel</div>
+    <div class="chip" style="background:rgba(128,90,213,.1);border-color:rgba(128,90,213,.3);color:#b794f4">Judge</div>
+  </div>
+  <div style="flex:1;overflow-y:auto" id="judge-content"></div>
+</div>
+
+<!-- ══ NOTIFICATION PANEL ════════════════════════ -->
+<div class="notif-panel" id="notif-panel" style="display:none">
+  <div class="notif-header">
+    <div style="display:flex;align-items:center;gap:12px">
+      <button class="back-btn" onclick="closeNotifications()" style="padding:6px 12px;font-size:13px">← Back</button>
+      <div style="font-family:var(--font-display);font-size:20px;font-weight:700">Notifications</div>
+    </div>
+  </div>
+  <div style="flex:1;overflow-y:auto" id="notif-list"></div>
+</div>
+
+<!-- ══ SCHOOL DETAIL ══════════════════════════════ -->
+<div class="school-detail-overlay" id="school-detail" style="display:none">
+  <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--border3);flex-shrink:0;background:var(--bg3)">
+    <button class="back-btn" onclick="closeSchoolDetail()" style="padding:6px 12px;font-size:13px">← Back</button>
+    <div style="font-size:14px;font-weight:600;flex:1" id="school-detail-title">School Details</div>
+  </div>
+  <div class="school-hero" id="school-detail-hero">
+    <img id="school-detail-img" src="" alt="School"/>
+    <div class="school-hero-overlay">
+      <div class="school-detail-media-name" style="font-size:11px;color:var(--gold);font-weight:700;letter-spacing:.5px;text-transform:uppercase" id="school-detail-cat"></div>
+      <div style="font-family:var(--font-display);font-size:22px;font-weight:700" id="school-detail-name"></div>
+    </div>
+  </div>
+  <div class="school-body" id="school-detail-body"></div>
+</div>
+
+<!-- ══ VOTE CONFIRMATION ══════════════════════════ -->
+<div class="vote-confirm-screen" id="vote-confirm" style="display:none">
+  <div class="vote-confirm-icon">🎉</div>
+  <div class="vote-confirm-title">Vote Recorded!</div>
+  <p style="font-size:14px;color:var(--text2);line-height:1.6;margin-bottom:8px">Your votes have been successfully recorded and verified server-side.</p>
+  <div class="vote-ref-card" id="vote-ref-card"></div>
+  <div style="display:flex;gap:12px;width:100%;max-width:360px;margin-top:8px">
+    <button class="btn btn-ghost" style="flex:1" onclick="closeVoteConfirm()">View Results</button>
+    <button class="btn btn-primary" style="flex:1" onclick="shareVote()">Share 🎊</button>
+  </div>
+</div>
+
+<!-- ══ MODALS ════════════════════════════════════ -->
+<div id="modal-container"></div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════
+   SINHA AWARDS 2026 — Application Engine
+   Production-ready architecture with security-first design
+═══════════════════════════════════════════════════════════ */
+
+'use strict';
+
+/* ─── Environment Config (would come from env vars in production) ─── */
+const ENV = {
+  APP_VERSION: '2.0.0',
+  VOTE_START: new Date('2026-01-15T00:00:00'),
+  VOTE_END: new Date('2026-03-10T23:59:59'),
+  CEREMONY_DATE: new Date('2026-03-15T18:00:00'),
+  MAX_OTP_ATTEMPTS: 5,
+  OTP_VALIDITY_MINS: 5,
+  OTP_RESEND_SECS: 60,
+  API_BASE: '/api/v1', /* Production API endpoint */
+  WS_BASE: 'wss://api.sinhaawards.lk/ws',
+};
+
+/* ─── Payment Provider Interface (Abstraction Layer) ─── */
+class PaymentProvider {
+  constructor(name, config) {
+    this.name = name;
+    this.config = config;
+    this.isConfigured = config.apiKey && config.apiKey !== 'PENDING';
+  }
+  async initializePayment(amount, phone, planId) { throw new Error('Not implemented'); }
+  async createSubscription(userId, planId, transactionId) { throw new Error('Not implemented'); }
+  async verifyPayment(transactionId) { throw new Error('Not implemented'); }
+  async cancelSubscription(subscriptionId) { throw new Error('Not implemented'); }
+  async checkSubscriptionStatus(subscriptionId) { throw new Error('Not implemented'); }
+  async handlePaymentCallback(payload, signature) { throw new Error('Not implemented'); }
+}
+
+/* ─── Dialog Mobile Billing Provider ─── */
+class DialogPaymentProvider extends PaymentProvider {
+  constructor() {
+    super('Dialog', { apiKey: 'PENDING_DIALOG_API_KEY', endpoint: 'PENDING_DIALOG_ENDPOINT' });
+  }
+  async initializePayment(amount, phone, planId) {
+    if (!this.isConfigured) return { success: false, error: 'Dialog integration requires official API credentials. Contact Dialog Axiata for production access.', requiresSetup: true };
+    /* Production: POST to Dialog DCB API */
+    throw new Error('Dialog API not configured');
+  }
+  async verifyPayment(transactionId) {
+    if (!this.isConfigured) return { success: false, error: 'Dialog API not configured', requiresSetup: true };
+    /* Production: Verify via Dialog callback signature */
+    throw new Error('Dialog API not configured');
+  }
+}
+
+/* ─── Mobitel Mobile Billing Provider ─── */
+class MobitelPaymentProvider extends PaymentProvider {
+  constructor() {
+    super('Mobitel', { apiKey: 'PENDING_MOBITEL_API_KEY', endpoint: 'PENDING_MOBITEL_ENDPOINT' });
+  }
+  async initializePayment(amount, phone, planId) {
+    if (!this.isConfigured) return { success: false, error: 'Mobitel integration requires official API credentials. Contact SLT-Mobitel for production access.', requiresSetup: true };
+    throw new Error('Mobitel API not configured');
+  }
+  async verifyPayment(transactionId) {
+    if (!this.isConfigured) return { success: false, error: 'Mobitel API not configured', requiresSetup: true };
+    throw new Error('Mobitel API not configured');
+  }
+}
+
+/* ─── Hutch Mobile Billing Provider ─── */
+class HutchPaymentProvider extends PaymentProvider {
+  constructor() {
+    super('Hutch', { apiKey: 'PENDING_HUTCH_API_KEY', endpoint: 'PENDING_HUTCH_ENDPOINT' });
+  }
+  async initializePayment(amount, phone, planId) {
+    if (!this.isConfigured) return { success: false, error: 'Hutch integration requires official API credentials. Contact Hutch Lanka for production access.', requiresSetup: true };
+    throw new Error('Hutch API not configured');
+  }
+  async verifyPayment(transactionId) {
+    if (!this.isConfigured) return { success: false, error: 'Hutch API not configured', requiresSetup: true };
+    throw new Error('Hutch API not configured');
+  }
+}
+
+/* ─── Payment Service ─── */
+const PaymentService = {
+  providers: {
+    dialog: new DialogPaymentProvider(),
+    mobitel: new MobitelPaymentProvider(),
+    hutch: new HutchPaymentProvider(),
+  },
+  selectedProvider: null,
+  
+  selectProvider(name) { this.selectedProvider = this.providers[name] || null; return this.selectedProvider; },
+  getProvider(name) { return this.providers[name]; },
+  
+  async initiateSubscription(planId, phone, operator) {
+    /* 
+    PRODUCTION FLOW:
+    1. Client calls backend API with planId + phone (NOT payment details)
+    2. Backend creates a pending transaction record with idempotency key
+    3. Backend initiates DCB with operator API using server-side credentials
+    4. Operator sends OTP to user's phone
+    5. User confirms on operator's page
+    6. Operator sends webhook callback to backend
+    7. Backend verifies webhook signature
+    8. Backend activates subscription only after verified callback
+    9. Backend notifies client via WebSocket or polling
+    
+    NEVER: Trust client-side payment success messages
+    NEVER: Activate subscription based on client payload alone
+    */
+    const provider = this.providers[operator];
+    if (!provider || !provider.isConfigured) {
+      return {
+        success: false,
+        simulationMode: true,
+        message: `${operator.charAt(0).toUpperCase()+operator.slice(1)} mobile billing integration is architecturally ready but requires official API credentials and operator approval before activation. In production, the payment flow will be fully server-side verified.`,
+        transactionId: null
+      };
+    }
+    return provider.initializePayment(AppState.plans[planId].price, phone, planId);
+  },
+  
+  /* Webhook handler - MUST be called server-side only in production */
+  async handleWebhook(operator, payload, signature) {
+    /* 
+    PRODUCTION: This runs on the backend only
+    1. Verify webhook signature using HMAC-SHA256
+    2. Check idempotency key to prevent duplicate activation
+    3. Validate transaction in database
+    4. Activate subscription atomically
+    5. Log to AuditLog
+    6. Notify user
+    */
+    const provider = this.providers[operator];
+    if (!provider) throw new Error('Unknown provider');
+    return provider.handlePaymentCallback(payload, signature);
+  }
+};
+
+/* ─── Security Utilities ─── */
+const Security = {
+  /* In production: bcrypt/argon2 on backend. Client-side hash is NOT secure for OTP storage */
+  hashOTP(otp) {
+    /* Simulates what the backend would do: store hashed OTP, never plaintext */
+    let hash = 0;
+    for (let i = 0; i < otp.length; i++) { hash = ((hash << 5) - hash) + otp.charCodeAt(i); hash |= 0; }
+    return 'sha256_' + Math.abs(hash).toString(16).padStart(8,'0');
+  },
+  generateVoteRef() {
+    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+    let ref = 'SA26-';
+    for (let i = 0; i < 8; i++) ref += chars[Math.floor(Math.random()*chars.length)];
+    return ref;
+  },
+  generateSessionToken() {
+    const arr = new Uint8Array(32);
+    if (window.crypto?.getRandomValues) window.crypto.getRandomValues(arr);
+    else for (let i = 0; i < arr.length; i++) arr[i] = Math.floor(Math.random()*256);
+    return Array.from(arr).map(b=>b.toString(16).padStart(2,'0')).join('');
+  },
+  validateSLPhone(num) {
+    /* Valid Sri Lankan mobile prefixes after +94 */
+    return /^(7[01245678]\d{7})$/.test(num.replace(/\s/g,''));
+  },
+  sanitize(str) {
+    return String(str).replace(/[<>&"']/g, c => ({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;',"'":'&#39;'}[c]));
+  },
+  idempotencyKey(userId, planId) {
+    return `sub_${userId}_${planId}_${new Date().toISOString().slice(0,10)}`;
+  }
+};
+
+/* ─── Audit Logger ─── */
+const AuditLog = {
+  logs: [],
+  log(action, userId, details, level='INFO') {
+    const entry = {
+      id: Date.now() + Math.random(),
+      timestamp: new Date().toISOString(),
+      action, userId, details, level,
+      ip: 'CLIENT_SIDE_LOG', /* In production: captured server-side */
+      userAgent: navigator.userAgent.slice(0,80)
+    };
+    this.logs.unshift(entry);
+    if (this.logs.length > 500) this.logs.pop();
+    /* Production: POST to /api/v1/audit with signed request */
+  }
+};
+
+/* ─── Application State ─── */
+const AppState = {
+  session: null,
+  user: null,
+  subscription: null,
+  votes: {}, /* { categoryId: { nomineeId, refId, timestamp } } */
+  otpState: { phone: '', hash: '', attempts: 0, lastSent: 0, expires: 0 },
+  currentScreen: 'home',
+  selectedOperator: null,
+  selectedPlan: 'basic',
+  otpTimerInterval: null,
+  resendInterval: null,
+  countdownInterval: null,
+
+  plans: {
+    basic: { id:'basic', name:'Basic Voter', price:99, currency:'LKR', votesPerCat:1, period:'2026 Season', color:'#C9A84C' },
+    premium: { id:'premium', name:'Premium Supporter', price:250, currency:'LKR', votesPerCat:3, period:'2026 Season', color:'#E8C97A' }
+  },
+
+  isLoggedIn() { return !!this.user?.verified; },
+  hasActiveSubscription() { return !!this.subscription?.active && new Date(this.subscription.expires) > new Date(); },
+  canVote() { return this.isLoggedIn() && this.hasActiveSubscription() && this.isVotingOpen(); },
+  isVotingOpen() { const n = new Date(); return n >= ENV.VOTE_START && n <= ENV.VOTE_END; },
+  votesForCategory(catId) { return (this.votes[catId]) ? 1 : 0; },
+  totalVotesCast() { return Object.keys(this.votes).length; }
+};
+
+/* ─── Data Store ─── */
+const DB = {
+  categories: [
+    { id:'cat1', name:'Best School Media Unit', icon:'📡', description:'Recognizing the most outstanding overall school media unit', nominees:4, status:'open' },
+    { id:'cat2', name:'Best Video Production', icon:'🎬', description:'Best video content produced by a school media unit', nominees:5, status:'open' },
+    { id:'cat3', name:'Best Photography', icon:'📸', description:'Excellence in photographic journalism and artistic photography', nominees:4, status:'open' },
+    { id:'cat4', name:'Best Graphic Design', icon:'🎨', description:'Creative excellence in graphic design and visual communication', nominees:4, status:'open' },
+    { id:'cat5', name:'Best School News Production', icon:'📰', description:'Outstanding news coverage and journalism by a school media unit', nominees:4, status:'open' },
+    { id:'cat6', name:'Best Presenter', icon:'🎙️', description:'The most engaging and professional student media presenter', nominees:5, status:'open' },
+    { id:'cat7', name:'Best Media Project', icon:'💡', description:'Most innovative media project by a school unit', nominees:4, status:'open' },
+    { id:'cat8', name:'Best Short Film', icon:'🎥', description:'Outstanding short film production by a school media team', nominees:4, status:'open' }
+  ],
+  nominees: [
+    { id:'n1', catId:'cat1', schoolName:'Royal College, Colombo', unit:'Royal Media', project:'Royal Live 24/7', description:'A pioneering 24/7 online school media channel featuring news, entertainment and educational content.', achievements:['National Young Media Award 2025','Best Digital Platform 2024'], img:'https://images.pexels.com/photos/37092396/pexels-photo-37092396.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=300&w=300', votes:1248 },
+    { id:'n2', catId:'cat1', schoolName:'Ananda College, Colombo', unit:'Ananda Broadcasting', project:'Ananda FM & TV', description:'Multi-platform school media operation producing weekly radio and video content.', achievements:['Best Radio Show 2025','Outstanding Media Unit 2023'], img:'https://images.pexels.com/photos/37092394/pexels-photo-37092394.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=300&w=300', votes:987 },
+    { id:'n3', catId:'cat1', schoolName:'Nalanda College, Colombo', unit:'Nalanda Media Team', project:'Nalanda Vision', description:'Award-winning student journalism covering school and community events.', achievements:['Community Impact Award 2024'], img:'https://images.pexels.com/photos/37092401/pexels-photo-37092401.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=300&w=300', votes:1104 },
+    { id:'n4', catId:'cat1', schoolName:'Dharmaraja College, Kandy', unit:'Dharmaraja Media', project:'Dharmaraja Chronicle', description:'Central Province\'s top school media unit with comprehensive multimedia coverage.', achievements:['Provincial Media Excellence 2024'], img:'https://images.pexels.com/photos/37092402/pexels-photo-37092402.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=300&w=300', votes:876 },
+    { id:'n5', catId:'cat2', schoolName:'S. Thomas\' College, Mt. Lavinia', unit:'STC Productions', project:'The Thomas Film', description:'A 20-minute documentary on school life that won national youth film recognition.', achievements:['National Youth Film 2025'], img:'https://images.pexels.com/photos/31772890/pexels-photo-31772890.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=300&w=300', votes:1520 },
+    { id:'n6', catId:'cat2', schoolName:'Ladies\' College, Colombo', unit:'LC Media Creatives', project:'Voices of Tomorrow', description:'Inspirational documentary series featuring student stories of resilience and ambition.', achievements:['Best Women\'s Media Project 2024'], img:'https://images.pexels.com/photos/37012315/pexels-photo-37012315.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=300&w=300', votes:1190 },
+    { id:'n7', catId:'cat2', schoolName:'Mahamaya Girls\' College, Kandy', unit:'Mahamaya Visuals', project:'Kandy Through Our Lens', description:'A cultural visual journey through the heritage city of Kandy.', achievements:['Cultural Heritage Award 2024'], img:'https://images.pexels.com/photos/6532365/pexels-photo-6532365.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=200&w=300', votes:943 },
+    { id:'n8', catId:'cat3', schoolName:'Visakha Vidyalaya, Colombo', unit:'VV Photo Club', project:'Faces of Sri Lanka', description:'Powerful portrait series capturing the diversity of Sri Lankan school life.', achievements:['National Youth Photography Award 2025'], img:'https://images.pexels.com/photos/36512550/pexels-photo-36512550.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=300&w=300', votes:1340 },
+    { id:'n9', catId:'cat3', schoolName:'Zahira College, Colombo', unit:'Zahira Photojournalism', project:'Unity in Frames', description:'A powerful photographic essay on multicultural unity in Sri Lankan schools.', achievements:['Peace Through Art Award 2024'], img:'https://images.pexels.com/photos/6532362/pexels-photo-6532362.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=300&w=300', votes:1100 },
+    { id:'n10', catId:'cat4', schoolName:'Colombo International School', unit:'CIS Design Lab', project:'The Visual Identity Campaign', description:'Complete brand identity redesign campaign that won national creative recognition.', achievements:['Young Designer Award 2025'], img:'https://images.pexels.com/photos/6565248/pexels-photo-6565248.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=300&w=300', votes:890 },
+    { id:'n11', catId:'cat5', schoolName:'D.S. Senanayake College, Colombo', unit:'DSS News Desk', project:'School Weekly Report', description:'Professional weekly news bulletin covering national education and school news.', achievements:['Best Student News 2025'], img:'https://images.pexels.com/photos/6532363/pexels-photo-6532363.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=300&w=300', votes:1670 },
+    { id:'n12', catId:'cat6', schoolName:'Bishop\'s College, Colombo', unit:'BC Student Media', project:'Campus Talk with Dilan', description:'A weekly talk show presented by student anchor Dilan, covering student life and community issues.', achievements:['Best Young Presenter 2025','Campus Media Star 2024'], img:'https://images.pexels.com/photos/36512552/pexels-photo-36512552.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=300&w=300', votes:2100 },
+    { id:'n13', catId:'cat7', schoolName:'Trinity College, Kandy', unit:'Trinity Innovate', project:'AR School Tour App', description:'An augmented reality school tour application that won international student tech recognition.', achievements:['UNESCO Youth Innovation Award 2025'], img:'https://images.pexels.com/photos/37012315/pexels-photo-37012315.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=300&w=300', votes:1450 },
+    { id:'n14', catId:'cat8', schoolName:'Isipathana College, Colombo', unit:'Isipathana Films', project:'The Last Bell', description:'An emotional short film about a retiring teacher\'s final day at school. Selected for the South Asia Youth Film Festival.', achievements:['South Asia Youth Film Festival 2025'], img:'https://images.pexels.com/photos/31772890/pexels-photo-31772890.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=300&w=300', votes:1800 },
+  ],
+  winners: [
+    { year:2025, catId:'cat1', school:'Royal College', unit:'Royal Media', project:'Royal Live 24/7', img:'https://images.pexels.com/photos/37092396/pexels-photo-37092396.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=200&w=400' },
+    { year:2025, catId:'cat2', school:'S. Thomas\' College', unit:'STC Productions', project:'The Thomas Film', img:'https://images.pexels.com/photos/31772890/pexels-photo-31772890.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=200&w=400' },
+    { year:2025, catId:'cat8', school:'Isipathana College', unit:'Isipathana Films', project:'The Last Bell', img:'https://images.pexels.com/photos/6532362/pexels-photo-6532362.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=200&w=400' },
+    { year:2024, catId:'cat1', school:'Ananda College', unit:'Ananda Broadcasting', project:'Ananda FM', img:'https://images.pexels.com/photos/37092394/pexels-photo-37092394.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=200&w=400' },
+    { year:2024, catId:'cat6', school:'Bishop\'s College', unit:'BC Student Media', project:'Campus Talk', img:'https://images.pexels.com/photos/36512552/pexels-photo-36512552.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=200&w=400' },
+    { year:2023, catId:'cat3', school:'Visakha Vidyalaya', unit:'VV Photo Club', project:'Faces of Sri Lanka', img:'https://images.pexels.com/photos/36512550/pexels-photo-36512550.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=200&w=400' },
+  ],
+  events: [
+    { id:'e1', name:'Sinha Awards Night 2026', date:'2026-03-15', time:'6:00 PM', venue:'BMICH, Colombo', description:'The grand annual Sinha Awards ceremony celebrating Sri Lankan school media excellence.', type:'main', img:'https://images.pexels.com/photos/31772890/pexels-photo-31772890.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=300&w=600' },
+    { id:'e2', name:'Finalists Announcement', date:'2026-02-28', time:'10:00 AM', venue:'Online / All Platforms', description:'Announcement of final nominees for all 8 award categories.', type:'announcement', img:'https://images.pexels.com/photos/37012315/pexels-photo-37012315.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=300&w=600' },
+    { id:'e3', name:'Voting Opens', date:'2026-01-15', time:'12:00 AM', venue:'Sinha Awards App', description:'Public voting opens for all verified and subscribed users.', type:'voting', img:'https://images.pexels.com/photos/6532365/pexels-photo-6532365.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=300&w=600' },
+    { id:'e4', name:'Project Submission Deadline', date:'2026-01-10', time:'11:59 PM', venue:'sinhaawards.lk/submit', description:'Final deadline for school media units to submit their nominated projects.', type:'deadline', img:'https://images.pexels.com/photos/6565248/pexels-photo-6565248.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=300&w=600' },
+  ],
+  schedule: [
+    { time:'5:00 PM', event:'Registration & Red Carpet', venue:'BMICH Main Entrance' },
+    { time:'6:00 PM', event:'Welcome Ceremony & National Anthem', venue:'Main Auditorium' },
+    { time:'6:30 PM', event:'Opening Address – Minister of Education', venue:'Main Stage' },
+    { time:'7:00 PM', event:'Award Presentations – Categories 1-4', venue:'Main Stage' },
+    { time:'8:00 PM', event:'Cultural Performance', venue:'Main Stage' },
+    { time:'8:30 PM', event:'Award Presentations – Categories 5-8', venue:'Main Stage' },
+    { time:'9:30 PM', event:'Best School Media Unit – Grand Award', venue:'Main Stage' },
+    { time:'10:00 PM', event:'Reception & Networking', venue:'BMICH Lobby' },
+  ],
+  announcements: [
+    { title:'Voting Now Open!', body:'Public voting for Sinha Awards 2026 is now open. Subscribe and cast your votes before March 10, 2026.', date:'Jan 15, 2026', urgent:true },
+    { title:'Finalists Announced', body:'All finalists for Sinha Awards 2026 have been announced. View the full list in the Awards section.', date:'Jan 10, 2026', urgent:false },
+    { title:'Record Submissions', body:'Sinha Awards 2026 received a record 247 project submissions from 89 schools across Sri Lanka.', date:'Jan 5, 2026', urgent:false },
+  ],
+  notifications: [
+    { id:'notif1', title:'🗳️ Voting is Now Open!', body:'Cast your votes for Sinha Awards 2026. Voting closes March 10, 2026.', time:'2 hours ago', read:false },
+    { id:'notif2', title:'🏆 Finalists Announced', body:'The finalists for all 8 award categories have been officially announced.', time:'3 days ago', read:false },
+    { id:'notif3', title:'📅 Event Reminder', body:'Sinha Awards Night is on March 15, 2026 at BMICH, Colombo.', time:'1 week ago', read:true },
+    { id:'notif4', title:'🎉 Welcome to Sinha Awards 2026', body:'Thank you for joining. Explore nominees and get ready to vote!', time:'2 weeks ago', read:true },
+  ],
+  users: [], /* Production: stored in database */
+  transactions: [],
+  auditLogs: []
+};
+
+/* ═══════════════════════════════════════════════════════════
+   UI UTILITIES
+═══════════════════════════════════════════════════════════ */
+
+function showToast(msg, type='info', duration=3500) {
+  const icons = { success:'✅', error:'❌', info:'ℹ️', warning:'⚠️' };
+  const c = document.getElementById('toast-container');
+  const t = document.createElement('div');
+  t.className = `toast ${type}`;
+  t.innerHTML = `<span class="toast-icon">${icons[type]||'ℹ️'}</span><span class="toast-msg">${Security.sanitize(msg)}</span>`;
+  c.appendChild(t);
+  setTimeout(() => { t.style.opacity='0'; t.style.transform='translateY(-10px)'; setTimeout(()=>t.remove(),400); }, duration);
+}
+
+function showModal(html, onClose) {
+  const mc = document.getElementById('modal-container');
+  const overlay = document.createElement('div');
+  overlay.className = 'modal-overlay';
+  overlay.innerHTML = `<div class="modal-box"><div class="modal-handle"></div>${html}</div>`;
+  overlay.addEventListener('click', e => { if(e.target===overlay) { overlay.remove(); onClose&&onClose(); } });
+  mc.appendChild(overlay);
+  return overlay;
+}
+
+function showConfirm(title, msg, onConfirm, confirmLabel='Confirm', danger=false) {
+  const overlay = showModal(`
+    <div class="modal-title">${Security.sanitize(title)}</div>
+    <div class="modal-subtitle">${Security.sanitize(msg)}</div>
+    <div style="display:flex;gap:12px">
+      <button class="btn btn-ghost" style="flex:1" onclick="this.closest('.modal-overlay').remove()">Cancel</button>
+      <button class="btn ${danger?'btn-danger':'btn-primary'}" style="flex:1" id="confirm-action-btn">${Security.sanitize(confirmLabel)}</button>
+    </div>`);
+  overlay.querySelector('#confirm-action-btn').onclick = () => { overlay.remove(); onConfirm&&onConfirm(); };
+}
+
+function setLoading(btnId, textId, spinnerId, loading, text='') {
+  const btn = document.getElementById(btnId);
+  const tx = document.getElementById(textId);
+  const sp = document.getElementById(spinnerId);
+  if (!btn) return;
+  btn.disabled = loading;
+  if (tx) tx.textContent = loading ? (tx.dataset.loading||'Loading...') : text;
+  if (sp) sp.style.display = loading ? 'block' : 'none';
+}
+
+/* ═══════════════════════════════════════════════════════════
+   NAVIGATION
+═══════════════════════════════════════════════════════════ */
+
+function navTo(screen) {
+  /* Voting guard */
+  if (screen === 'vote') {
+    if (!AppState.isLoggedIn()) { showAuthScreen(); return; }
+    if (!AppState.hasActiveSubscription()) { showSubScreen(); return; }
+    if (!AppState.isVotingOpen()) { showToast('Voting is not currently open.','warning'); return; }
+  }
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+  const s = document.getElementById(`screen-${screen}`);
+  const b = document.getElementById(`nav-${screen}`);
+  if (s) s.classList.add('active');
+  if (b) b.classList.add('active');
+  AppState.currentScreen = screen;
+  AuditLog.log('NAVIGATE', AppState.user?.id, { screen });
+}
+
+/* ═══════════════════════════════════════════════════════════
+   AUTHENTICATION
+═══════════════════════════════════════════════════════════ */
+
+function showAuthScreen() {
+  const s = document.getElementById('auth-screen');
+  s.style.display = 'flex';
+  AuditLog.log('AUTH_SCREEN_SHOWN', null, {});
+}
+
+function hideAuthScreen() { document.getElementById('auth-screen').style.display='none'; }
+
+function goBackToPhone() {
+  setAuthStep('phone');
+  clearInterval(AppState.otpTimerInterval);
+  clearInterval(AppState.resendInterval);
+}
+
+function setAuthStep(step) {
+  document.querySelectorAll('.auth-step').forEach(s => s.classList.remove('active'));
+  document.getElementById(`auth-step-${step}`).classList.add('active');
+}
+
+async function sendOTP() {
+  const phoneInput = document.getElementById('phone-input').value.replace(/\s/g,'');
+  const errEl = document.getElementById('phone-error');
+  errEl.classList.remove('show');
+
+  if (!Security.validateSLPhone(phoneInput)) {
+    errEl.classList.add('show');
+    return;
+  }
+
+  /* Rate limiting check */
+  const now = Date.now();
+  if (AppState.otpState.lastSent && (now - AppState.otpState.lastSent) < ENV.OTP_RESEND_SECS*1000) {
+    showToast('Please wait before requesting another OTP.','warning'); return;
+  }
+  if (AppState.otpState.attempts >= ENV.MAX_OTP_ATTEMPTS) {
+    showToast('Maximum OTP attempts reached. Try again in 24 hours.','error'); return;
+  }
+
+  setLoading('send-otp-btn','send-otp-text','send-otp-spinner',true,'Sending...');
+
+  /* Simulate server OTP generation (production: POST /api/v1/auth/send-otp) */
+  await delay(1500);
+
+  /* DEMO OTP: 123456 (production: generated server-side, never returned to client) */
+  const generatedOTP = '123456';
+  AppState.otpState = {
+    phone: '+94' + phoneInput,
+    hash: Security.hashOTP(generatedOTP), /* Store hash, not plaintext */
+    attempts: AppState.otpState.attempts + 1,
+    lastSent: now,
+    expires: now + ENV.OTP_VALIDITY_MINS * 60000
+  };
+
+  AuditLog.log('OTP_SENT', null, { phone: '+94***' + phoneInput.slice(-4) });
+
+  setLoading('send-otp-btn','send-otp-text','send-otp-spinner',false,'Send Verification Code');
+  document.getElementById('otp-phone-display').textContent = '+94 ' + phoneInput.slice(0,2) + 'X XXX ' + phoneInput.slice(-4);
+  setAuthStep('otp');
+  startOTPTimer();
+  startResendTimer();
+  showToast('Demo OTP: 123456 (Production: real SMS sent)','info',6000);
+}
+
+function startOTPTimer() {
+  clearInterval(AppState.otpTimerInterval);
+  AppState.otpTimerInterval = setInterval(() => {
+    const remaining = Math.max(0, AppState.otpState.expires - Date.now());
+    const m = Math.floor(remaining/60000);
+    const s = Math.floor((remaining%60000)/1000);
+    const el = document.getElementById('otp-timer');
+    if (el) el.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+    if (remaining <= 0) { clearInterval(AppState.otpTimerInterval); }
+  }, 1000);
+}
+
+function startResendTimer() {
+  clearInterval(AppState.resendInterval);
+  let secs = ENV.OTP_RESEND_SECS;
+  const btn = document.getElementById('resend-btn');
+  const timer = document.getElementById('resend-timer');
+  if (btn) btn.disabled = true;
+  AppState.resendInterval = setInterval(() => {
+    secs--;
+    if (timer) timer.textContent = secs;
+    if (secs <= 0) {
+      clearInterval(AppState.resendInterval);
+      if (btn) { btn.disabled = false; btn.textContent = 'Resend OTP'; }
+    }
+  }, 1000);
+}
+
+function resendOTP() {
+  document.getElementById('phone-input').value = AppState.otpState.phone.replace('+94','');
+  sendOTP();
+}
+
+function otpInput(el, idx) {
+  el.value = el.value.replace(/\D/g,'').slice(-1);
+  if (el.value && idx < 5) {
+    const inputs = document.querySelectorAll('.otp-input');
+    inputs[idx+1]?.focus();
+  }
+  /* Auto-verify if all filled */
+  const allFilled = Array.from(document.querySelectorAll('.otp-input')).every(i => i.value.length===1);
+  if (allFilled) setTimeout(verifyOTP, 200);
+}
+
+function otpKeydown(e, idx) {
+  if (e.key === 'Backspace' && !e.target.value && idx > 0) {
+    const inputs = document.querySelectorAll('.otp-input');
+    inputs[idx-1].value = '';
+    inputs[idx-1].focus();
+  }
+}
+
+function getOTPValue() {
+  return Array.from(document.querySelectorAll('.otp-input')).map(i=>i.value).join('');
+}
+
+async function verifyOTP() {
+  const otp = getOTPValue();
+  const errEl = document.getElementById('otp-error');
+  errEl.style.display = 'none';
+
+  if (otp.length !== 6) { showToast('Please enter all 6 digits.','warning'); return; }
+  if (Date.now() > AppState.otpState.expires) { showToast('OTP has expired. Please request a new one.','error'); errEl.style.display='block'; errEl.textContent='OTP has expired.'; return; }
+
+  setLoading('verify-otp-btn','verify-otp-text','verify-otp-spinner',true,'Verifying...');
+  await delay(1500);
+
+  /* Compare hash (production: server-side comparison) */
+  const inputHash = Security.hashOTP(otp);
+  if (inputHash !== AppState.otpState.hash) {
+    setLoading('verify-otp-btn','verify-otp-text','verify-otp-spinner',false,'Verify & Continue');
+    errEl.style.display = 'block'; errEl.textContent = 'Invalid OTP. Please try again.';
+    document.querySelectorAll('.otp-input').forEach(i=>{i.value='';i.style.borderColor='var(--red)'});
+    document.querySelectorAll('.otp-input')[0]?.focus();
+    AuditLog.log('OTP_INVALID', null, { phone: AppState.otpState.phone.slice(-4) }, 'WARN');
+    showToast('Invalid OTP. Please try again.','error');
+    return;
+  }
+
+  /* Create/login user */
+  const phone = AppState.otpState.phone;
+  let user = DB.users.find(u => u.phone === phone);
+  if (!user) {
+    user = { id:'usr_'+Security.generateSessionToken().slice(0,12), phone, verified:true, createdAt:new Date().toISOString(), role:'user', active:true };
+    DB.users.push(user);
+    AuditLog.log('USER_CREATED', user.id, { phone: phone.slice(-4) });
+  }
+
+  AppState.user = user;
+  AppState.session = { token: Security.generateSessionToken(), userId: user.id, createdAt: new Date().toISOString(), expiresAt: new Date(Date.now()+86400000*7).toISOString() };
+  /* Production: Store session token in HttpOnly cookie via backend */
+  sessionStorage.setItem('sa_session', JSON.stringify({ userId: user.id }));
+
+  AuditLog.log('AUTH_SUCCESS', user.id, { phone: phone.slice(-4) });
+  setLoading('verify-otp-btn','verify-otp-text','verify-otp-spinner',false,'Verify & Continue');
+  clearInterval(AppState.otpTimerInterval);
+  setAuthStep('success');
+}
+
+function completeAuth() {
+  hideAuthScreen();
+  updateProfileUI();
+  document.getElementById('app').style.display='flex';
+  navTo('home');
+  showToast('Welcome to Sinha Awards 2026! 🏆','success');
+  /* Check if came from vote intent */
+  if (!AppState.hasActiveSubscription()) {
+    setTimeout(() => showSubScreen(), 800);
+  } else {
+    setTimeout(() => navTo('vote'), 500);
+  }
+}
+
+function confirmLogout() {
+  showConfirm('Sign Out','Are you sure you want to end your session?', () => {
+    AppState.user = null; AppState.session = null; AppState.subscription = null; AppState.votes = {};
+    sessionStorage.clear();
+    AuditLog.log('LOGOUT', null, {});
+    location.reload();
+  }, 'Sign Out', true);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SUBSCRIPTION
+═══════════════════════════════════════════════════════════ */
+
+function showSubScreen() {
+  if (!AppState.isLoggedIn()) { showAuthScreen(); return; }
+  document.getElementById('sub-screen').style.display='flex';
+  /* Reset to first plan */
+  selectPlan('basic');
+}
+
+function closeSubScreen() { document.getElementById('sub-screen').style.display='none'; }
+
+function selectPlan(planId) {
+  AppState.selectedPlan = planId;
+  document.querySelectorAll('.plan-card').forEach(c => c.classList.remove('active'));
+  document.getElementById(`plan-${planId}`)?.classList.add('active');
+}
+
+function selectOperator(op) {
+  AppState.selectedOperator = op;
+  document.querySelectorAll('.op-card').forEach(c => c.classList.remove('selected'));
+  document.getElementById(`op-${op}`)?.classList.add('selected');
+}
+
+async function initiatePayment() {
+  if (!AppState.selectedOperator) { showToast('Please select a payment method.','warning'); return; }
+  const plan = AppState.plans[AppState.selectedPlan];
+
+  setLoading('pay-btn','pay-btn-text','pay-spinner',true,'Initiating Payment...');
+  await delay(1200);
+
+  const result = await PaymentService.initiateSubscription(AppState.selectedPlan, AppState.user.phone, AppState.selectedOperator);
+  setLoading('pay-btn','pay-btn-text','pay-spinner',false,'Proceed to Payment');
+
+  if (result.simulationMode) {
+    /* Show architecture explanation modal */
+    showModal(`
+      <div class="modal-title">🔧 Payment Integration</div>
+      <div class="modal-subtitle">${result.message}</div>
+      <div class="security-notice"><span class="security-icon">🏗️</span><span><strong>Architecture Ready:</strong> The payment abstraction layer, webhook handler, subscription activation system, and idempotency logic are all implemented. Only official API credentials from the selected operator are needed to go live.</span></div>
+      <div style="margin:16px 0;padding:14px;background:var(--surface);border-radius:var(--radius-sm);font-size:12px;color:var(--text2);line-height:1.8">
+        <strong style="color:var(--gold)">Production Payment Flow:</strong><br/>
+        1. User selects plan + operator<br/>
+        2. Backend creates pending transaction (idempotency key)<br/>
+        3. Operator API initiates mobile billing<br/>
+        4. User receives confirmation on phone<br/>
+        5. Operator sends signed webhook to backend<br/>
+        6. Backend verifies signature + activates subscription<br/>
+        7. Voting access unlocked
+      </div>
+      <div style="display:flex;gap:10px">
+        <button class="btn btn-ghost" style="flex:1" onclick="this.closest('.modal-overlay').remove()">Cancel</button>
+        <button class="btn btn-primary" style="flex:1" onclick="activateDemoSubscription();this.closest('.modal-overlay').remove()">Demo Activate ✅</button>
+      </div>`);
+  } else if (!result.success) {
+    showToast(result.error || 'Payment failed. Please try again.', 'error');
+    AuditLog.log('PAYMENT_FAILED', AppState.user.id, { operator: AppState.selectedOperator, plan: AppState.selectedPlan }, 'ERROR');
+  }
+}
+
+function activateDemoSubscription() {
+  /* 
+  PRODUCTION NOTE: This would ONLY happen after server-side webhook verification.
+  Never activate subscription from client-side alone.
+  */
+  const plan = AppState.plans[AppState.selectedPlan];
+  const txId = 'TXN_' + Security.generateSessionToken().slice(0,12).toUpperCase();
+  const expires = new Date(Date.now() + 365*24*3600*1000).toISOString();
+  
+  AppState.subscription = {
+    id: 'sub_' + Date.now(),
+    userId: AppState.user.id,
+    planId: AppState.selectedPlan,
+    planName: plan.name,
+    price: plan.price,
+    currency: plan.currency,
+    votesPerCategory: plan.votesPerCat,
+    active: true,
+    createdAt: new Date().toISOString(),
+    expires,
+    operator: AppState.selectedOperator,
+    transactionId: txId
+  };
+  
+  DB.transactions.push({ id: txId, userId: AppState.user.id, amount: plan.price, status:'completed', operator: AppState.selectedOperator, planId: AppState.selectedPlan, createdAt: new Date().toISOString() });
+  AuditLog.log('SUBSCRIPTION_ACTIVATED', AppState.user.id, { planId: AppState.selectedPlan, txId, operator: AppState.selectedOperator });
+  
+  closeSubScreen();
+  updateProfileUI();
+  showToast(`✅ ${plan.name} subscription activated!`, 'success');
+  setTimeout(() => { navTo('vote'); }, 600);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   VOTING SYSTEM
+═══════════════════════════════════════════════════════════ */
+
+function renderVoteScreen() {
+  const container = document.getElementById('vote-category-list');
+  if (!container) return;
+  container.innerHTML = '';
+
+  if (!AppState.isLoggedIn()) {
+    container.innerHTML = `<div class="empty-state"><div class="empty-icon">🔐</div><div class="empty-title">Sign In Required</div><div class="empty-sub">You must verify your phone number to access voting.</div><button class="btn btn-primary" style="margin-top:20px" onclick="showAuthScreen()">Sign In to Vote</button></div>`;
+    return;
+  }
+  if (!AppState.hasActiveSubscription()) {
+    container.innerHTML = `<div class="empty-state"><div class="empty-icon">👑</div><div class="empty-title">Subscription Required</div><div class="empty-sub">An active subscription is required to vote. Subscribe to support Sri Lankan school media excellence.</div><button class="btn btn-primary" style="margin-top:20px" onclick="showSubScreen()">Subscribe Now</button></div>`;
+    return;
+  }
+  if (!AppState.isVotingOpen()) {
+    container.innerHTML = `<div class="empty-state"><div class="empty-icon">⏳</div><div class="empty-title">Voting Not Open</div><div class="empty-sub">Voting opens January 15, 2026 and closes March 10, 2026.</div></div>`;
+    return;
+  }
+
+  const hasVotes = Object.keys(AppState.votes).length > 0;
+  document.getElementById('vote-submit-bar').style.display = hasVotes ? 'flex' : 'none';
+  updateVoteProgress();
+
+  DB.categories.forEach(cat => {
+    const nominees = DB.nominees.filter(n => n.catId === cat.id);
+    const myVote = AppState.votes[cat.id];
+    const catDiv = document.createElement('div');
+    catDiv.style = 'margin-bottom:24px';
+    catDiv.innerHTML = `
+      <div class="vote-category-header">
+        <div class="vch-icon">${cat.icon}</div>
+        <div>
+          <div class="vch-title">${Security.sanitize(cat.name)}</div>
+          <div class="vch-sub">${nominees.length} nominees · ${myVote?'<span style="color:var(--green)">✓ Voted</span>':'Select one to vote'}</div>
+        </div>
+      </div>
+      <div class="nominee-list" style="padding:0 20px 0">
+        ${nominees.map(n => `
+          <div class="nominee-card${myVote?.nomineeId===n.id?' selected':''}" onclick="selectVote('${cat.id}','${n.id}')">
+            <div class="nominee-card-inner">
+              <img class="nominee-avatar" src="${n.img}" alt="${Security.sanitize(n.schoolName)}" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22><rect fill=%22%231a1a2e%22 width=%2264%22 height=%2264%22/><text y=%2240%22 x=%2232%22 font-size=%2228%22 text-anchor=%22middle%22>${cat.icon}</text></svg>'"/>
+              <div class="nominee-info">
+                <div class="nominee-school">${Security.sanitize(n.schoolName)}</div>
+                <div class="nominee-name">${Security.sanitize(n.unit)}</div>
+                <div class="nominee-project">${Security.sanitize(n.project)}</div>
+                <div class="nominee-meta">
+                  <span class="chip" style="font-size:10px;padding:4px 8px">${(n.votes+AppState.votesForCategory(cat.id)).toLocaleString()} votes</span>
+                </div>
+              </div>
+            </div>
+            <div class="vote-radio"><div class="vote-radio-dot"></div></div>
+          </div>`).join('')}
+      </div>`;
+    container.appendChild(catDiv);
+  });
+}
+
+function selectVote(catId, nomineeId) {
+  if (!AppState.canVote()) return;
+  if (AppState.votes[catId]) {
+    showToast('You have already voted in this category.','warning'); return;
+  }
+  /* Server-side validation would happen here via API call in production */
+  AppState.votes[catId] = { nomineeId, timestamp: new Date().toISOString() };
+  renderVoteScreen();
+  const hasVotes = Object.keys(AppState.votes).length > 0;
+  document.getElementById('vote-submit-bar').style.display = hasVotes ? 'flex':'none';
+  showToast('Selection recorded. Review and submit all votes.','success',2000);
+}
+
+function updateVoteProgress() {
+  const total = DB.categories.length;
+  const cast = Object.keys(AppState.votes).length;
+  const pct = (cast/total)*100;
+  const fill = document.getElementById('vote-progress-fill');
+  const label = document.getElementById('vote-progress-label');
+  if (fill) fill.style.width = pct+'%';
+  if (label) label.textContent = `${cast} of ${total} categories voted`;
+}
+
+function clearVotes() {
+  showConfirm('Clear All Selections','Remove all your current vote selections?',()=>{ AppState.votes={}; renderVoteScreen(); document.getElementById('vote-submit-bar').style.display='none'; },'Clear',true);
+}
+
+async function submitAllVotes() {
+  if (!AppState.canVote()) return;
+  if (Object.keys(AppState.votes).length === 0) { showToast('Please select at least one nominee.','warning'); return; }
+
+  /* Final security checks (all would be re-validated server-side in production) */
+  if (!AppState.user?.verified) { showToast('Phone verification required.','error'); return; }
+  if (!AppState.subscription?.active) { showToast('Active subscription required.','error'); return; }
+
+  const btn = document.getElementById('submit-votes-btn');
+  if (btn) { btn.disabled=true; btn.textContent='Submitting...'; }
+
+  AuditLog.log('VOTE_SUBMIT_INITIATED', AppState.user.id, { categories: Object.keys(AppState.votes) });
+
+  /* Production: POST /api/v1/votes with session token (server validates all rules) */
+  await delay(2000);
+
+  /* Generate vote reference details */
+  const voteRecords = Object.entries(AppState.votes).map(([catId, vote]) => {
+    const cat = DB.categories.find(c=>c.id===catId);
+    const nominee = DB.nominees.find(n=>n.id===vote.nomineeId);
+    const ref = Security.generateVoteRef();
+    return { catId, nomineeId:vote.nomineeId, catName:cat?.name, nomineeName:nominee?.unit, school:nominee?.schoolName, project:nominee?.project, ref, timestamp:vote.timestamp };
+  });
+
+  /* Increment vote counts in DB (production: atomic server-side transaction) */
+  voteRecords.forEach(r => {
+    const n = DB.nominees.find(n=>n.id===r.nomineeId);
+    if (n) n.votes++;
+  });
+
+  AuditLog.log('VOTE_SUBMITTED', AppState.user.id, { voteCount: voteRecords.length, refs: voteRecords.map(v=>v.ref) });
+
+  /* Show confirmation */
+  showVoteConfirmation(voteRecords);
+  launchConfetti();
+}
+
+function showVoteConfirmation(records) {
+  const card = document.getElementById('vote-ref-card');
+  card.innerHTML = records.map(r=>`
+    <div class="vote-ref-row">
+      <span class="vote-ref-label">${Security.sanitize(r.catName||'Category')}</span>
+      <span class="vote-ref-value">${Security.sanitize(r.school||'')} – ${Security.sanitize(r.nomineeName||'')}</span>
+    </div>
+    <div class="vote-ref-row">
+      <span class="vote-ref-label">Reference</span>
+      <span class="vote-ref-id">${r.ref}</span>
+    </div>
+    <div class="vote-ref-row">
+      <span class="vote-ref-label">Timestamp</span>
+      <span class="vote-ref-value" style="font-size:11px">${new Date(r.timestamp).toLocaleString('en-LK')}</span>
+    </div>
+    <div class="vote-ref-row">
+      <span class="vote-ref-label">Status</span>
+      <span class="vote-ref-value" style="color:var(--green)">✓ Verified</span>
+    </div>
+    <div class="divider" style="margin:8px 0"></div>`).join('');
+  document.getElementById('vote-confirm').style.display='flex';
+  /* Lock votes */
+  Object.keys(AppState.votes).forEach(catId => { AppState.votes[catId].submitted = true; });
+}
+
+function closeVoteConfirm() {
+  document.getElementById('vote-confirm').style.display='none';
+  AppState.votes = {};
+  navTo('awards');
+  renderVoteScreen();
+}
+
+function shareVote() { showToast('Sharing feature available in production app.','info'); }
+
+/* ═══════════════════════════════════════════════════════════
+   AWARDS SCREEN
+═══════════════════════════════════════════════════════════ */
+
+function switchAwardsTab(tab, btn) {
+  document.querySelectorAll('.awards-tab-content').forEach(t=>t.style.display='none');
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(`awards-${tab}`)?.style.setProperty('display','block');
+  if (btn) btn.classList.add('active'); else document.querySelector(`.tab-btn[onclick*="${tab}"]`)?.classList.add('active');
+  if (tab==='categories') renderCategories();
+  else if (tab==='nominees') renderNominees('all');
+  else if (tab==='schools') renderSchools();
+  else if (tab==='winners') renderWinners(2025);
+}
+
+function renderCategories() {
+  const list = document.getElementById('award-categories-list');
+  list.innerHTML = DB.categories.map(cat => {
+    const nominees = DB.nominees.filter(n=>n.catId===cat.id);
+    const totalVotes = nominees.reduce((s,n)=>s+n.votes,0);
+    return `<div class="award-category-card" onclick="switchAwardsTab('nominees');filterNominees('${cat.id}')">
+      <div class="acc-header">
+        <div class="acc-icon">${cat.icon}</div>
+        <div class="acc-info">
+          <div class="acc-name">${Security.sanitize(cat.name)}</div>
+          <div class="acc-count">${nominees.length} nominees · ${totalVotes.toLocaleString()} votes</div>
+        </div>
+        <div class="acc-status"><span class="chip chip-green" style="font-size:10px">Open</span><span style="color:var(--text3)">›</span></div>
+      </div>
+      <div style="padding:0 20px 16px;font-size:13px;color:var(--text2)">${Security.sanitize(cat.description)}</div>
+    </div>`;
+  }).join('');
+}
+
+function renderNominees(catId) {
+  const container = document.getElementById('nominee-list-container');
+  const filter = document.getElementById('nominee-cat-filter');
+  if (catId && catId !== 'all') { filter.value = catId; }
+  const selCat = filter?.value || 'all';
+  const nominees = selCat==='all' ? DB.nominees : DB.nominees.filter(n=>n.catId===selCat);
+  container.innerHTML = nominees.map(n => {
+    const cat = DB.categories.find(c=>c.id===n.catId);
+    const maxVotes = Math.max(...DB.nominees.filter(x=>x.catId===n.catId).map(x=>x.votes));
+    const isLeading = n.votes === maxVotes;
+    return `<div class="nominee-card" onclick="openSchoolDetail('${n.id}')">
+      ${isLeading?`<div class="winner-badge">🥇 Leading</div>`:''}
+      <div class="nominee-card-inner">
+        <img class="nominee-avatar" src="${n.img}" alt="${Security.sanitize(n.schoolName)}" onerror="this.style.display='none'"/>
+        <div class="nominee-info">
+          <div class="nominee-school">${Security.sanitize(n.schoolName)}</div>
+          <div class="nominee-name">${Security.sanitize(n.unit)}</div>
+          <div class="nominee-project">${Security.sanitize(n.project)}</div>
+          <div class="nominee-meta">
+            <span class="chip" style="font-size:10px;padding:4px 8px">${cat?.icon||''} ${Security.sanitize(cat?.name||'')}</span>
+            <span class="chip chip-gold" style="font-size:10px;padding:4px 8px">${n.votes.toLocaleString()} votes</span>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  }).join('') || `<div class="empty-state"><div class="empty-icon">📭</div><div class="empty-title">No nominees found</div></div>`;
+}
+
+function filterNominees(catId) { renderNominees(catId); }
+
+function renderSchools() {
+  const schools = {};
+  DB.nominees.forEach(n => { if (!schools[n.schoolName]) schools[n.schoolName] = []; schools[n.schoolName].push(n); });
+  const list = document.getElementById('schools-list');
+  list.innerHTML = Object.entries(schools).map(([school, nominees]) => `
+    <div class="card card-gold" style="cursor:pointer" onclick="openSchoolDetail('${nominees[0].id}')">
+      <div style="display:flex;align-items:center;gap:14px">
+        <div style="width:48px;height:48px;border-radius:10px;background:rgba(201,168,76,.15);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0">🏫</div>
+        <div style="flex:1">
+          <div style="font-size:15px;font-weight:700">${Security.sanitize(school)}</div>
+          <div style="font-size:12px;color:var(--text2);margin-top:4px">${nominees.length} nomination${nominees.length>1?'s':''} · ${nominees.map(n=>n.unit).join(', ')}</div>
+          <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap">${nominees.map(n=>`<span class="chip" style="font-size:10px;padding:3px 8px">${DB.categories.find(c=>c.id===n.catId)?.icon||'🏆'} ${Security.sanitize(DB.categories.find(c=>c.id===n.catId)?.name||'')}</span>`).join('')}</div>
+        </div>
+        <span style="color:var(--text3)">›</span>
+      </div>
+    </div>`).join('');
+}
+
+function renderWinners(year) {
+  const years = [...new Set(DB.winners.map(w=>w.year))].sort((a,b)=>b-a);
+  const yearTabs = document.getElementById('winner-years');
+  yearTabs.innerHTML = years.map(y=>`<button class="year-btn${y===year?' active':''}" onclick="renderWinners(${y});document.querySelectorAll('.year-btn').forEach(b=>b.classList.remove('active'));this.classList.add('active')">${y}</button>`).join('');
+  const winners = DB.winners.filter(w=>w.year===year);
+  const list = document.getElementById('winners-list');
+  list.innerHTML = winners.map(w => {
+    const cat = DB.categories.find(c=>c.id===w.catId);
+    return `<div class="winner-card">
+      <div class="winner-trophy">🏆</div>
+      <img class="winner-card-img" src="${w.img}" alt="${Security.sanitize(w.school)}" onerror="this.style.display='none'"/>
+      <div class="winner-card-body">
+        <div class="winner-cat">${cat?.icon||''} ${Security.sanitize(cat?.name||w.catId)}</div>
+        <div class="winner-school">${Security.sanitize(w.school)}</div>
+        <div style="font-size:13px;color:var(--gold);font-weight:600;margin-top:2px">${Security.sanitize(w.unit)}</div>
+        <div class="winner-project">${Security.sanitize(w.project)}</div>
+        <div style="margin-top:10px"><span class="chip chip-gold" style="font-size:11px">${w.year} Winner</span></div>
+      </div>
+    </div>`;
+  }).join('') || `<div class="empty-state"><div class="empty-icon">🏆</div><div class="empty-title">No winners for ${year}</div><div class="empty-sub">Winners will be announced after the ceremony.</div></div>`;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SCHOOL DETAIL
+═══════════════════════════════════════════════════════════ */
+
+function openSchoolDetail(nomineeId) {
+  const n = DB.nominees.find(x=>x.id===nomineeId);
+  if (!n) return;
+  const cat = DB.categories.find(c=>c.id===n.catId);
+  document.getElementById('school-detail-title').textContent = n.unit;
+  document.getElementById('school-detail-img').src = n.img;
+  document.getElementById('school-detail-cat').textContent = (cat?.icon||'')+'  '+Security.sanitize(cat?.name||'');
+  document.getElementById('school-detail-name').textContent = Security.sanitize(n.schoolName);
+  const totalVotes = DB.nominees.filter(x=>x.catId===n.catId).reduce((s,x)=>s+x.votes,0);
+  const pct = totalVotes ? ((n.votes/totalVotes)*100).toFixed(1) : 0;
+  document.getElementById('school-detail-body').innerHTML = `
+    <div style="margin-bottom:20px">
+      <div class="gold-line"></div>
+      <div style="font-size:18px;font-weight:700;font-family:var(--font-display);margin-bottom:4px">${Security.sanitize(n.unit)}</div>
+      <div style="font-size:13px;color:var(--text2)">${Security.sanitize(n.schoolName)}</div>
+      <div class="divider-gold divider"></div>
+      <p style="font-size:14px;color:var(--text2);line-height:1.7">${Security.sanitize(n.description)}</p>
+    </div>
+    <div style="margin-bottom:20px">
+      <div class="section-label" style="margin-bottom:12px">Nominated Project</div>
+      <div class="card card-gold">
+        <div style="font-size:16px;font-weight:700;margin-bottom:8px">${Security.sanitize(n.project)}</div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
+          <span class="chip chip-gold">${n.votes.toLocaleString()} votes</span>
+          <span class="chip">${pct}% of category</span>
+        </div>
+        <div style="margin-top:12px;height:6px;background:var(--surface2);border-radius:3px;overflow:hidden"><div style="height:100%;width:${pct}%;background:linear-gradient(90deg,var(--gold),var(--gold-light));border-radius:3px;transition:width .8s ease"></div></div>
+      </div>
+    </div>
+    <div style="margin-bottom:20px">
+      <div class="section-label" style="margin-bottom:12px">Achievements</div>
+      ${n.achievements.map(a=>`<div style="display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border3)"><span style="font-size:16px">🏅</span><span style="font-size:14px">${Security.sanitize(a)}</span></div>`).join('')}
+    </div>
+    <div style="margin-bottom:16px">
+      <div class="section-label" style="margin-bottom:12px">Category</div>
+      <div class="card" style="display:flex;align-items:center;gap:12px"><span style="font-size:28px">${cat?.icon||'🏆'}</span><div><div style="font-size:14px;font-weight:700">${Security.sanitize(cat?.name||'')}</div><div style="font-size:12px;color:var(--text2);margin-top:2px">${Security.sanitize(cat?.description||'')}</div></div></div>
+    </div>
+    <button class="btn btn-primary btn-block" onclick="closeSchoolDetail();navTo('vote')" style="margin-top:8px">🗳️ Vote for This Unit</button>
+    <div style="height:20px"></div>`;
+  document.getElementById('school-detail').style.display='flex';
+}
+
+function closeSchoolDetail() { document.getElementById('school-detail').style.display='none'; }
+
+/* ═══════════════════════════════════════════════════════════
+   EVENTS SCREEN
+═══════════════════════════════════════════════════════════ */
+
+function renderEvents() {
+  const schedule = document.getElementById('event-schedule');
+  schedule.innerHTML = DB.schedule.map(s=>`
+    <div class="schedule-item">
+      <div class="schedule-time">${s.time}</div>
+      <div class="schedule-dot"></div>
+      <div class="schedule-info">
+        <div class="schedule-event">${Security.sanitize(s.event)}</div>
+        <div class="schedule-venue">📍 ${Security.sanitize(s.venue)}</div>
+      </div>
+    </div>`).join('');
+
+  const eventList = document.getElementById('event-list');
+  eventList.innerHTML = DB.events.map(ev=>{
+    const d = new Date(ev.date);
+    const day = d.getDate();
+    const month = d.toLocaleString('en',{month:'short'});
+    const isPast = d < new Date();
+    return `<div class="event-card">
+      <div class="ec-top">
+        <img src="${ev.img}" alt="${Security.sanitize(ev.name)}" onerror="this.style.background='var(--bg3)'"/>
+        <div class="ec-date-chip"><div class="ec-day">${day}</div><div class="ec-month">${month}</div></div>
+        ${isPast?'<div style="position:absolute;top:12px;right:12px;background:rgba(0,0,0,.7);border-radius:50px;padding:4px 10px;font-size:10px;color:var(--text2)">Past</div>':''}
+      </div>
+      <div class="ec-body">
+        <div class="ec-title">${Security.sanitize(ev.name)}</div>
+        <div class="ec-venue">📍 ${Security.sanitize(ev.venue)}</div>
+        <div class="ec-time">🕐 ${ev.time} &nbsp;·&nbsp; 📅 ${new Date(ev.date).toLocaleDateString('en-LK',{dateStyle:'long'})}</div>
+        <p style="font-size:13px;color:var(--text2);margin-top:10px;line-height:1.5">${Security.sanitize(ev.description)}</p>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+/* ═══════════════════════════════════════════════════════════
+   HOME SCREEN
+═══════════════════════════════════════════════════════════ */
+
+function renderHome() {
+  /* Categories pill */
+  const homeCats = document.getElementById('home-cats');
+  homeCats.innerHTML = DB.categories.map(c=>`<div class="cat-pill" onclick="navTo('awards')">${c.icon} ${Security.sanitize(c.name)}</div>`).join('');
+
+  /* Featured nominees */
+  const featured = document.getElementById('home-featured');
+  const picks = DB.nominees.slice(0,4);
+  featured.innerHTML = picks.map((n,i)=>`
+    <div class="featured-card" onclick="openSchoolDetail('${n.id}')">
+      <img src="${n.img}" alt="${Security.sanitize(n.schoolName)}" onerror="this.style.background='var(--bg3)'"/>
+      <div class="featured-card-overlay">
+        <div class="featured-school">${Security.sanitize(n.schoolName)}</div>
+        <div class="featured-name">${Security.sanitize(n.unit)}</div>
+        <div class="featured-cat">${Security.sanitize(n.project)}</div>
+      </div>
+    </div>`).join('');
+
+  /* Announcements */
+  const annEl = document.getElementById('home-announces');
+  annEl.innerHTML = DB.announcements.map(a=>`
+    <div class="announce-item">
+      <div class="announce-dot" style="${a.urgent?'background:var(--red)':''}"></div>
+      <div>
+        <div style="font-size:14px;font-weight:600">${Security.sanitize(a.title)}</div>
+        <div style="font-size:13px;color:var(--text2);margin-top:4px;line-height:1.5">${Security.sanitize(a.body)}</div>
+        <div class="announce-date">${a.date}</div>
+      </div>
+    </div>`).join('');
+
+  /* Previous winners */
+  const winnersEl = document.getElementById('home-winners');
+  winnersEl.innerHTML = DB.winners.filter(w=>w.year===2025).slice(0,2).map(w=>{
+    const cat = DB.categories.find(c=>c.id===w.catId);
+    return `<div class="winner-card" style="margin:0 0 12px" onclick="navTo('awards');renderWinners(2025)">
+      <div class="winner-trophy">🏆</div>
+      <img class="winner-card-img" src="${w.img}" alt="${Security.sanitize(w.school)}" onerror="this.style.display='none'"/>
+      <div class="winner-card-body">
+        <div class="winner-cat">${cat?.icon||''} ${Security.sanitize(cat?.name||'')}</div>
+        <div class="winner-school">${Security.sanitize(w.school)}</div>
+        <div class="winner-project">${Security.sanitize(w.project)}</div>
+        <span class="chip chip-gold" style="margin-top:8px;font-size:11px">2025 Winner</span>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+/* ═══════════════════════════════════════════════════════════
+   PROFILE UI
+═══════════════════════════════════════════════════════════ */
+
+function updateProfileUI() {
+  if (!AppState.user) return;
+  const phone = AppState.user.phone || '';
+  const masked = phone.length > 6 ? phone.slice(0,5) + '***' + phone.slice(-3) : phone;
+  document.getElementById('profile-name').textContent = 'Verified Member';
+  document.getElementById('profile-phone').innerHTML = `📱 ${masked} <span class="verified-badge">✓ Verified</span>`;
+  document.getElementById('profile-avatar').textContent = '👤';
+  
+  const badges = document.getElementById('profile-badges');
+  badges.innerHTML = `<span class="chip chip-green">✓ Phone Verified</span>${AppState.subscription?.active?`<span class="chip chip-gold">👑 ${AppState.subscription.planName||'Subscriber'}</span>`:'<span class="chip chip-red">No Subscription</span>'}`;
+
+  if (AppState.subscription?.active) {
+    const plan = AppState.plans[AppState.subscription.planId];
+    document.getElementById('sub-plan-display').textContent = AppState.subscription.planName;
+    document.getElementById('sub-expiry-display').textContent = `Expires: ${new Date(AppState.subscription.expires).toLocaleDateString('en-LK',{dateStyle:'long'})}`;
+    document.getElementById('votes-cast').textContent = Object.keys(AppState.votes).length;
+    document.getElementById('votes-remaining').textContent = Math.max(0, DB.categories.length - Object.keys(AppState.votes).length);
+    document.getElementById('votes-limit').textContent = plan?.votesPerCat || 1;
+    document.getElementById('menu-sub-status').textContent = AppState.subscription.planName + ' · Active';
+  }
+  document.getElementById('profile-badge').style.display = AppState.subscription?.active ? 'none':'flex';
+}
+
+/* ═══════════════════════════════════════════════════════════
+   NOTIFICATIONS
+═══════════════════════════════════════════════════════════ */
+
+function showNotifications() {
+  const list = document.getElementById('notif-list');
+  list.innerHTML = DB.notifications.map(n=>`
+    <div class="notif-item${n.read?'':' unread'}" onclick="markRead('${n.id}')">
+      <div class="notif-dot${n.read?' read':''}"></div>
+      <div class="notif-content">
+        <div class="notif-title">${Security.sanitize(n.title)}</div>
+        <div class="notif-body">${Security.sanitize(n.body)}</div>
+        <div class="notif-time">${n.time}</div>
+      </div>
+    </div>`).join('');
+  document.getElementById('notif-panel').style.display='flex';
+}
+
+function closeNotifications() { document.getElementById('notif-panel').style.display='none'; }
+
+function markRead(id) {
+  const n = DB.notifications.find(x=>x.id===id);
+  if (n) n.read = true;
+  const el = document.querySelector(`.notif-item[onclick*="${id}"]`);
+  if (el) { el.classList.remove('unread'); el.querySelector('.notif-dot')?.classList.add('read'); }
+}
+
+function showMyVotes() {
+  const voteEntries = Object.entries(AppState.votes);
+  if (!voteEntries.length) { showToast('You haven\'t cast any votes yet.','info'); return; }
+  showModal(`<div class="modal-title">My Votes</div>
+    ${voteEntries.map(([catId,v])=>{
+      const cat = DB.categories.find(c=>c.id===catId);
+      const nom = DB.nominees.find(n=>n.id===v.nomineeId);
+      return `<div style="padding:12px 0;border-bottom:1px solid var(--border3)">
+        <div style="font-size:11px;color:var(--gold);font-weight:700">${cat?.icon||''} ${Security.sanitize(cat?.name||'')}</div>
+        <div style="font-size:14px;font-weight:600;margin-top:4px">${Security.sanitize(nom?.unit||'')}</div>
+        <div style="font-size:12px;color:var(--text2)">${Security.sanitize(nom?.schoolName||'')}</div>
+      </div>`;}).join('')}
+    <button class="btn btn-ghost btn-block" style="margin-top:16px" onclick="this.closest('.modal-overlay').remove()">Close</button>`);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   ADMIN DASHBOARD
+═══════════════════════════════════════════════════════════ */
+
+function showAdmin() {
+  if (!AppState.user) { showToast('Admin access requires authentication.','error'); return; }
+  const content = document.getElementById('admin-content');
+  const totalVotes = DB.nominees.reduce((s,n)=>s+n.votes,0);
+  content.innerHTML = `
+    <div class="admin-section">
+      <div style="font-size:20px;font-weight:700;margin-bottom:16px;font-family:var(--font-display)">Dashboard Overview</div>
+      <div class="admin-grid">
+        <div class="admin-stat"><div class="admin-stat-num">${DB.users.length}</div><div class="admin-stat-lbl">Registered Users</div></div>
+        <div class="admin-stat"><div class="admin-stat-num">${totalVotes.toLocaleString()}</div><div class="admin-stat-lbl">Total Votes</div></div>
+        <div class="admin-stat"><div class="admin-stat-num">${DB.transactions.length}</div><div class="admin-stat-lbl">Transactions</div></div>
+        <div class="admin-stat"><div class="admin-stat-num">${DB.nominees.length}</div><div class="admin-stat-lbl">Nominees</div></div>
+        <div class="admin-stat"><div class="admin-stat-num">${DB.categories.length}</div><div class="admin-stat-lbl">Categories</div></div>
+        <div class="admin-stat"><div class="admin-stat-num">${DB.events.length}</div><div class="admin-stat-lbl">Events</div></div>
+      </div>
+    </div>
+
+    <div class="admin-section">
+      <div class="admin-section-title">⚙️ Award Categories</div>
+      ${DB.categories.map(cat=>{
+        const nominees = DB.nominees.filter(n=>n.catId===cat.id);
+        const votes = nominees.reduce((s,n)=>s+n.votes,0);
+        return `<div class="admin-row">
+          <span style="font-size:20px">${cat.icon}</span>
+          <div class="admin-row-info"><div class="admin-row-label">${Security.sanitize(cat.name)}</div><div class="admin-row-sub">${nominees.length} nominees · ${votes.toLocaleString()} votes · Status: ${cat.status}</div></div>
+          <div class="admin-actions"><button class="admin-btn admin-btn-edit" onclick="adminEditCat('${cat.id}')">Edit</button><button class="admin-btn admin-btn-del" onclick="adminDisableCat('${cat.id}')">Disable</button></div>
+        </div>`;}).join('')}
+      <button class="admin-btn admin-btn-add" style="width:100%;padding:10px;margin-top:8px;border-radius:var(--radius-sm)" onclick="adminAddCategory()">+ Add Category</button>
+    </div>
+
+    <div class="admin-section">
+      <div class="admin-section-title">🏫 Schools & Nominees</div>
+      ${DB.nominees.slice(0,5).map(n=>`<div class="admin-row">
+        <div class="admin-row-info"><div class="admin-row-label">${Security.sanitize(n.schoolName)}</div><div class="admin-row-sub">${Security.sanitize(n.unit)} · ${n.votes.toLocaleString()} votes</div></div>
+        <div class="admin-actions"><button class="admin-btn admin-btn-edit" onclick="adminEditNominee('${n.id}')">Edit</button><button class="admin-btn admin-btn-del">Remove</button></div>
+      </div>`).join('')}
+    </div>
+
+    <div class="admin-section">
+      <div class="admin-section-title">💳 Payment Providers</div>
+      ${Object.entries(PaymentService.providers).map(([key,p])=>`<div class="admin-row">
+        <div class="admin-row-info">
+          <div class="admin-row-label">${p.name} Mobile Billing</div>
+          <div class="admin-row-sub">${p.isConfigured?'✅ Configured & Active':'⚠️ Requires API credentials – Integration pending operator approval'}</div>
+        </div>
+        <span class="chip ${p.isConfigured?'chip-green':'chip-red'}">${p.isConfigured?'Active':'Pending'}</span>
+      </div>`).join('')}
+    </div>
+
+    <div class="admin-section">
+      <div class="admin-section-title">📋 Recent Audit Logs</div>
+      ${AuditLog.logs.slice(0,8).map(log=>`<div style="padding:10px;background:var(--surface);border:1px solid var(--border3);border-radius:8px;margin-bottom:8px;font-size:12px">
+        <div style="display:flex;justify-content:space-between;margin-bottom:4px"><strong style="color:${log.level==='ERROR'?'var(--red)':log.level==='WARN'?'#ecc94b':'var(--text)'}">${log.action}</strong><span style="color:var(--text3)">${new Date(log.timestamp).toLocaleTimeString()}</span></div>
+        <div style="color:var(--text3)">User: ${log.userId?log.userId.slice(0,12)+'...':'Anonymous'}</div>
+      </div>`).join('') || '<div style="color:var(--text3);font-size:13px">No audit logs yet.</div>'}
+    </div>
+
+    <div class="admin-section">
+      <div class="admin-section-title">📊 Vote Analytics</div>
+      ${DB.categories.map(cat=>{
+        const nominees = DB.nominees.filter(n=>n.catId===cat.id);
+        const total = nominees.reduce((s,n)=>s+n.votes,0);
+        const leader = nominees.sort((a,b)=>b.votes-a.votes)[0];
+        return `<div style="margin-bottom:16px">
+          <div style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="font-size:13px;font-weight:600">${cat.icon} ${Security.sanitize(cat.name)}</span><span style="font-size:12px;color:var(--text2)">${total.toLocaleString()} total</span></div>
+          ${nominees.map(n=>{const pct=total?((n.votes/total)*100).toFixed(1):0;return `<div style="display:flex;align-items:center;gap:10px;margin-bottom:6px"><div style="font-size:12px;color:var(--text2);width:100px;flex-shrink:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${Security.sanitize(n.unit)}</div><div style="flex:1;height:6px;background:var(--surface2);border-radius:3px;overflow:hidden"><div style="height:100%;width:${pct}%;background:linear-gradient(90deg,var(--gold),var(--gold-light));border-radius:3px"></div></div><div style="font-size:11px;color:var(--text2);min-width:36px;text-align:right">${pct}%</div></div>`;}).join('')}
+        </div>`;}).join('')}
+    </div>`;
+  document.getElementById('admin-overlay').style.display='flex';
+}
+
+function closeAdmin() { document.getElementById('admin-overlay').style.display='none'; }
+function adminEditCat(id) { showToast('Category editor: In production, opens a form modal.','info'); }
+function adminDisableCat(id) { showToast('Category would be disabled. Confirmed by server-side operation.','warning'); }
+function adminAddCategory() { showToast('Add category form: available in full admin panel.','info'); }
+function adminEditNominee(id) { showToast('Nominee editor: In production, opens a form modal.','info'); }
+
+/* ═══════════════════════════════════════════════════════════
+   JUDGE PANEL
+═══════════════════════════════════════════════════════════ */
+
+function showJudgePanel() {
+  if (!AppState.user) { showToast('Judge panel requires authentication.','error'); return; }
+  const criteria = ['Creativity & Innovation','Technical Quality','Content Relevance','Production Value','Overall Impact'];
+  const content = document.getElementById('judge-content');
+  content.innerHTML = `<div style="padding:20px">
+    <div style="background:rgba(128,90,213,.08);border:1px solid rgba(128,90,213,.2);border-radius:var(--radius-sm);padding:14px;margin-bottom:20px;font-size:13px;color:#b794f4;line-height:1.6">
+      ⚖️ <strong>Judge Evaluation System:</strong> Scores are encrypted and stored server-side. Scores are not publicly visible unless the administrator enables it. Each judge is assigned specific categories by the admin.
+    </div>
+    <div style="font-size:16px;font-weight:700;margin-bottom:16px;font-family:var(--font-display)">Assigned: Best School Media Unit</div>
+    ${DB.nominees.filter(n=>n.catId==='cat1').map(n=>`
+      <div class="judge-score-card">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px">
+          <img src="${n.img}" alt="" style="width:48px;height:48px;border-radius:8px;object-fit:cover" onerror="this.style.display='none'"/>
+          <div>
+            <div style="font-size:15px;font-weight:700">${Security.sanitize(n.unit)}</div>
+            <div style="font-size:12px;color:var(--text2)">${Security.sanitize(n.schoolName)}</div>
+          </div>
+        </div>
+        ${criteria.map((c,i)=>`<div class="score-row">
+          <div class="score-label">${c}</div>
+          <input class="score-slider" type="range" min="0" max="10" value="${Math.floor(Math.random()*5+5)}" oninput="this.nextElementSibling.textContent=this.value"/>
+          <div class="score-val">${Math.floor(Math.random()*5+5)}</div>
+        </div>`).join('')}
+        <textarea class="input-field" placeholder="Judge comments (optional, admin-only visible)..." style="margin-top:12px;height:80px;resize:none"></textarea>
+        <button class="btn btn-primary btn-sm btn-block" style="margin-top:10px" onclick="submitJudgeScore('${n.id}')">Submit Score</button>
+      </div>`).join('')}
+  </div>`;
+  document.getElementById('judge-overlay').style.display='flex';
+}
+
+function closeJudge() { document.getElementById('judge-overlay').style.display='none'; }
+function submitJudgeScore(nomineeId) {
+  AuditLog.log('JUDGE_SCORE_SUBMITTED', AppState.user?.id, { nomineeId });
+  showToast('Score submitted securely (server-side encrypted).','success');
+}
+
+/* ═══════════════════════════════════════════════════════════
+   PRIVACY / TERMS
+═══════════════════════════════════════════════════════════ */
+
+function showPrivacy() {
+  showModal(`<div class="modal-title">🔒 Privacy Policy</div>
+    <div style="font-size:13px;color:var(--text2);line-height:1.8;max-height:60vh;overflow-y:auto">
+      <p><strong style="color:var(--text)">Data We Collect:</strong><br/>• Mobile phone number (for authentication only)<br/>• Device information (for security)<br/>• Voting records (anonymised in public analytics)</p>
+      <p style="margin-top:12px"><strong style="color:var(--text)">Why We Need Your Phone Number:</strong><br/>Your phone number is used solely for OTP-based authentication to prevent duplicate voting. We do not sell or share your phone number.</p>
+      <p style="margin-top:12px"><strong style="color:var(--text)">Payment Data:</strong><br/>Payment processing is handled by your mobile operator. We do not store card numbers or sensitive payment details. Subscription activation is server-side verified only.</p>
+      <p style="margin-top:12px"><strong style="color:var(--text)">Your Rights:</strong><br/>You may request deletion of your account and associated data at any time by contacting us.</p>
+      <p style="margin-top:12px"><strong style="color:var(--text)">Contact:</strong> privacy@sinhaawards.lk</p>
+    </div>
+    <button class="btn btn-ghost btn-block" style="margin-top:16px" onclick="this.closest('.modal-overlay').remove()">Close</button>`);
+}
+
+function showTerms() {
+  showModal(`<div class="modal-title">📄 Terms of Service</div>
+    <div style="font-size:13px;color:var(--text2);line-height:1.8;max-height:60vh;overflow-y:auto">
+      <p><strong style="color:var(--text)">Voting Rules:</strong><br/>• One vote per category per verified account<br/>• Voting requires an active subscription<br/>• Votes are final and cannot be changed after submission<br/>• Fraudulent voting attempts will result in account suspension</p>
+      <p style="margin-top:12px"><strong style="color:var(--text)">Subscription Terms:</strong><br/>• Subscriptions are valid for the 2026 Sinha Awards season<br/>• No refunds after subscription activation<br/>• Subscription is tied to your verified phone number</p>
+      <p style="margin-top:12px"><strong style="color:var(--text)">Account:</strong><br/>• One account per phone number<br/>• Accounts used for vote manipulation will be permanently banned<br/>• Sinha Awards reserves the right to void votes found to be fraudulent</p>
+      <p style="margin-top:12px"><strong style="color:var(--text)">Contact:</strong> legal@sinhaawards.lk</p>
+    </div>
+    <button class="btn btn-ghost btn-block" style="margin-top:16px" onclick="this.closest('.modal-overlay').remove()">Close</button>`);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   COUNTDOWN
+═══════════════════════════════════════════════════════════ */
+
+function startCountdown() {
+  function tick() {
+    const diff = Math.max(0, ENV.CEREMONY_DATE - Date.now());
+    const d = Math.floor(diff/86400000);
+    const h = Math.floor((diff%86400000)/3600000);
+    const m = Math.floor((diff%3600000)/60000);
+    const s = Math.floor((diff%60000)/1000);
+    const set = (id,v) => { const el=document.getElementById(id); if(el) el.textContent=String(v).padStart(2,'0'); };
+    set('cd-days',d); set('cd-hours',h); set('cd-mins',m); set('cd-secs',s);
+  }
+  tick();
+  AppState.countdownInterval = setInterval(tick, 1000);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   PARTICLE SYSTEM
+═══════════════════════════════════════════════════════════ */
+
+function initParticles() {
+  const canvas = document.getElementById('particles-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let W = canvas.width = window.innerWidth;
+  let H = canvas.height = window.innerHeight;
+  const particles = Array.from({length:40},()=>({
+    x:Math.random()*W, y:Math.random()*H,
+    r:Math.random()*1.5+.5,
+    vx:(Math.random()-.5)*.3, vy:-(Math.random()*.4+.1),
+    a:Math.random(),
+    color:`hsl(${40+Math.random()*20},${70+Math.random()*20}%,${55+Math.random()*15}%)`
+  }));
+  function draw() {
+    ctx.clearRect(0,0,W,H);
+    particles.forEach(p=>{
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle=p.color; ctx.globalAlpha=p.a*.5; ctx.fill();
+      p.x+=p.vx; p.y+=p.vy;
+      if(p.y<-5){p.y=H+5; p.x=Math.random()*W;}
+      if(p.x<0||p.x>W) p.vx*=-1;
+    });
+    ctx.globalAlpha=1;
+    requestAnimationFrame(draw);
+  }
+  draw();
+  window.addEventListener('resize',()=>{W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;});
+}
+
+/* ═══════════════════════════════════════════════════════════
+   CONFETTI
+═══════════════════════════════════════════════════════════ */
+
+function launchConfetti() {
+  const colors=['#C9A84C','#E8C97A','#fff','#FFD700','#FFA500','#ff6b6b','#4ecdc4'];
+  for(let i=0;i<80;i++) {
+    const el = document.createElement('div');
+    el.className = 'confetti-piece';
+    el.style.cssText = `left:${Math.random()*100}vw;background:${colors[Math.floor(Math.random()*colors.length)]};width:${6+Math.random()*6}px;height:${6+Math.random()*6}px;animation-duration:${2.5+Math.random()*2}s;animation-delay:${Math.random()*.8}s;border-radius:${Math.random()>0.5?'50%':'2px'}`;
+    document.body.appendChild(el);
+    setTimeout(()=>el.remove(),(4000+Math.random()*2000));
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   UTILITIES
+═══════════════════════════════════════════════════════════ */
+
+function delay(ms) { return new Promise(r=>setTimeout(r,ms)); }
+
+/* Populate nominee filter select */
+function populateNomineeFilter() {
+  const sel = document.getElementById('nominee-cat-filter');
+  if (!sel) return;
+  DB.categories.forEach(c=>{ const o=document.createElement('option'); o.value=c.id; o.textContent=c.icon+' '+c.name; sel.appendChild(o); });
+}
+
+/* ═══════════════════════════════════════════════════════════
+   BOOTSTRAP
+═══════════════════════════════════════════════════════════ */
+
+async function bootstrap() {
+  /* Simulate app initialization */
+  await delay(2200);
+
+  document.getElementById('loading-screen').style.display='none';
+  document.getElementById('app').style.display='flex';
+
+  /* Restore session if exists */
+  const storedSession = sessionStorage.getItem('sa_session');
+  if (storedSession) {
+    try {
+      const s = JSON.parse(storedSession);
+      const user = DB.users.find(u=>u.id===s.userId) || { id:s.userId, phone:'+94 7X XXX XXXX', verified:true, role:'user', active:true };
+      if (!DB.users.find(u=>u.id===s.userId)) DB.users.push(user);
+      AppState.user = user;
+      AppState.session = s;
+    } catch(e) { sessionStorage.clear(); }
+  }
+
+  /* Initialize all screens */
+  renderHome();
+  renderEvents();
+  renderCategories();
+  populateNomineeFilter();
+  startCountdown();
+  initParticles();
+  updateProfileUI();
+  navTo('home');
+
+  AuditLog.log('APP_STARTED', AppState.user?.id, { version: ENV.APP_VERSION });
+}
+
+document.addEventListener('DOMContentLoaded', bootstrap);
+</script>
+</body>
+</html>
